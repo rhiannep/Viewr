@@ -9,24 +9,35 @@
 import Foundation
 import Quartz
 
-class Bookmarks {
-    private var bookmarks = [String: PDFPage]()
-    
-    func add(name: String, page: PDFPage) {
-        bookmarks[name] = page
-    }
-    
-    func get(byName: String) -> PDFPage? {
-        return bookmarks[byName]
-    }
+struct Bookmark {
+    let name: String
+    let page: PDFPage
 }
 
-class BookmarkOutline: NSObject, NSOutlineViewDataSource {
+class BookmarkOutline: NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate {
     
-    private var bookmarks = [String]()
+    private var bookmarks = [Bookmark]()
+    private var bookmarkNames = [String]()
+    private var owner: DocumentWindowController? = nil
     
-    func append(_ name: String) {
-        bookmarks.append(name)
+    func add(name: String, page: PDFPage) {
+        bookmarks.append(Bookmark(name: name, page: page))
+    }
+    
+    func get(byName: String) -> Bookmark? {
+        return bookmarks.first(where: {$0.name == byName})
+    }
+    
+    func set(owner: DocumentWindowController) {
+        self.owner = owner
+    }
+    
+    @IBAction func goToBookmark(_ sender: NSButtonCell) {
+        if let cell = sender.representedObject as? NSTableCellView {
+            if let bookmark = cell.objectValue as? Bookmark {
+                owner?.lectureSelectionDidChange(bookmark)
+            }
+        }
     }
     
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
@@ -38,6 +49,25 @@ class BookmarkOutline: NSObject, NSOutlineViewDataSource {
     }
     
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-        return 0
+        return bookmarks.count
+    }
+    
+    func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
+        let view = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell"), owner: self) as? NSTableCellView
+        if let textField = view?.textField {
+            if let bookmark = item as? Bookmark {
+                textField.stringValue = bookmark.name
+                view?.objectValue = bookmark
+            }
+        }
+        return view
+    }
+    
+    func outlineViewSelectionDidChange(_ notification: Notification) {
+        if let outlineView = notification.object as? NSOutlineView {
+            if let item = outlineView.item(atRow: outlineView.selectedRow) {
+              owner?.lectureSelectionDidChange(item)
+            }
+        }
     }
 }

@@ -12,15 +12,13 @@ import Quartz
 class DocumentWindowController: NSWindowController, NSWindowDelegate {
     
 
+    @IBOutlet weak var bookmarkOutline: BookmarkOutline!
     @IBOutlet weak var pdfView: PDFView!
-
     @IBOutlet weak var toolBarTitle: NSTextField!
-    
     @IBOutlet weak var toolBar: NSView!
-    
-    @IBOutlet weak var outline: LectureSetOutline!
-    
+    @IBOutlet weak var lectureOutline: LectureSetOutline!
     @IBOutlet weak var outlineView: NSOutlineView!
+    @IBOutlet weak var bookmarkOutlineView: NSOutlineView!
     
     var openDocuments = 0
     var openDocumentNames = [URL]()
@@ -30,6 +28,7 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
         self.init(windowNibName: NSNib.Name(rawValue: "DocumentWindow"))
     }
     
+
 
     @IBAction func openPDF(_ sender: Any) {
         let openPanel = NSOpenPanel()
@@ -41,12 +40,12 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
                 for url in openPanel.urls {
                     if var document = PDFDocument(url: url) {
                         if !self.openDocumentNames.contains(url) {
-                            self.outline.append(document)
+                            self.lectureOutline.append(document)
                             self.openDocumentNames.append(url)
                             self.openDocuments += 1
                             self.selectedDocument = document
                         } else {
-                            self.selectedDocument = self.outline.get(byURL: url)
+                            self.selectedDocument = self.lectureOutline.get(byURL: url)
                             document = self.selectedDocument!
                         }
                         self.outlineView.reloadData()
@@ -69,7 +68,8 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
 
     override func windowDidLoad() {
         super.windowDidLoad()
-        outline?.set(window: self)
+        lectureOutline?.set(window: self)
+        bookmarkOutline?.set(owner: self)
         self.outlineView.reloadData()
 
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
@@ -83,7 +83,11 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
             selectedDocument = page.document
             pdfView.go(to: page)
             toolBarTitle.stringValue = "\((page.document?.documentURL?.lastPathComponent)!) page \(page.label!)"
+        } else if let bookmark = item as? Bookmark {
+//            bookmarkOutlineView.deselectRow(bookmarkOutlineView.selectedRow)
+            outlineView.selectRowIndexes(IndexSet(integer: outlineView.row(forItem: bookmark.page)), byExtendingSelection: false)
         }
+        outlineView.scrollRowToVisible(outlineView.selectedRow)
     }
     
     @IBAction func goToPreviousOutlineItem(_ sender: Any) {
@@ -102,6 +106,15 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
             return
         }
         outlineView.selectRowIndexes(IndexSet(integer: outlineView.selectedRow + 1), byExtendingSelection: false)
+    }
+    
+    @IBAction func newBookmark(_ sender: Any) {
+        if let page = pdfView.currentPage {
+            let name = "\((page.document?.documentURL?.lastPathComponent)!) page \(page.label!)"
+            let bookmark = Bookmark(name: name, page: page)
+            bookmarkOutline.add(name: name, page: page)
+            bookmarkOutlineView.reloadData()
+        }
     }
 }
 
@@ -150,11 +163,6 @@ class LectureSetOutline: NSObject, NSOutlineViewDataSource, NSOutlineViewDelegat
                 textField.stringValue = (document.documentURL?.lastPathComponent)!
             } else if let page = item as? PDFPage {
                 textField.stringValue = page.label!
-                if #available(OSX 10.13, *) {
-                    view?.imageView?.image = page.thumbnail(of: (view?.imageView?.image?.size)!, for: PDFDisplayBox.mediaBox)
-                } else {
-                    view?.imageView = NSImageView(image: NSImage(data: page.dataRepresentation)!)
-                }
             }
         }
         return view
