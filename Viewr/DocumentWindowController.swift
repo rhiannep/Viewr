@@ -39,7 +39,7 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
         openPanel.beginSheetModal(for: self.window!, completionHandler: {(status) in
             if status == NSApplication.ModalResponse.OK {
                 for url in openPanel.urls {
-                    if let document = PDFDocument(url: url) {
+                    if var document = PDFDocument(url: url) {
                         if !self.openDocumentNames.contains(url) {
                             self.outline.append(document)
                             self.openDocumentNames.append(url)
@@ -47,10 +47,11 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
                             self.selectedDocument = document
                         } else {
                             self.selectedDocument = self.outline.get(byURL: url)
+                            document = self.selectedDocument!
                         }
                         self.outlineView.reloadData()
-                        self.outlineView.selectAll(self)
-                        self.outlineView.selectRowIndexes(IndexSet(integer: self.outlineView.row(forItem: self.selectedDocument)), byExtendingSelection: false)
+                        self.selectedDocument = document
+                        self.outlineView.selectRowIndexes(IndexSet(integer: self.outlineView.row(forItem: document)), byExtendingSelection: false)
                     }
                 }
             }
@@ -61,7 +62,7 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
             pdfView.document = selectedDocument
             let name = selectedDocument?.documentURL?.lastPathComponent
             window?.title = "\(name!) (\(openDocuments) open)"
-            toolBarTitle.stringValue = name! + " page \((pdfView.currentPage?.label)!)"
+            toolBarTitle.stringValue = name!
             toolBar.isHidden = false
         }
     }
@@ -69,6 +70,8 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
     override func windowDidLoad() {
         super.windowDidLoad()
         outline?.set(window: self)
+        self.outlineView.reloadData()
+
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     }
     
@@ -77,8 +80,9 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
             selectedDocument = document
             toolBarTitle.stringValue = (document.documentURL?.lastPathComponent)!
         } else if let page = item as? PDFPage {
-            pdfView.go(to: page)
             selectedDocument = page.document
+            pdfView.go(to: page)
+            toolBarTitle.stringValue = "\((page.document?.documentURL?.lastPathComponent)!) page \(page.label!)"
         }
     }
     
@@ -159,15 +163,7 @@ class LectureSetOutline: NSObject, NSOutlineViewDataSource, NSOutlineViewDelegat
     func outlineViewSelectionDidChange(_ notification: Notification) {
         if let outlineView = notification.object as? NSOutlineView {
             let item = outlineView.item(atRow: outlineView.selectedRow)
-            if let document = item as? PDFDocument {
-                print(document.documentURL?.lastPathComponent)
-                window?.selectedDocument = document
-                window?.toolBarTitle.stringValue = (document.documentURL?.lastPathComponent)!
-            } else if let page = item as? PDFPage {
-                print(page.document?.documentURL?.lastPathComponent)
-                window?.pdfView.go(to: page)
-                window?.selectedDocument = page.document
-            }
+            window?.lectureSelectionDidChange(item!)
         }
     }
 }
