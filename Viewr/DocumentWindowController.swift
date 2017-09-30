@@ -31,10 +31,15 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
     var selectedDocument : PDFDocument? = nil {
         didSet {
             pdfView.document = selectedDocument
-            let name = selectedDocument?.documentURL?.lastPathComponent
-            window?.title = "\(name!) (\(openDocuments) open)"
-            toolBarTitle.stringValue = name!
-            toolBar.isHidden = false
+            if selectedDocument == nil {
+                window?.title = "Viewr"
+                toolBar.isHidden = true
+            } else {
+                let name = selectedDocument?.documentURL?.lastPathComponent
+                window?.title = "\(name!) (\(openDocuments) open)"
+                toolBarTitle.stringValue = name!
+                toolBar.isHidden = false
+            }
         }
     }
     
@@ -103,7 +108,7 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
             pdfView.go(to: page)
             toolBarTitle.stringValue = "\((page.document?.documentURL?.lastPathComponent)!) page \(page.label!)"
         } else if let bookmark = item as? Bookmark {
-            lectureOutlineView.selectRowIndexes(IndexSet(integer: lectureOutlineView.row(forItem: bookmark.page)), byExtendingSelection: false)
+            lectureSelectionDidChange(bookmark.page)
         }
         lectureOutlineView.scrollRowToVisible(lectureOutlineView.selectedRow)
     }
@@ -128,18 +133,41 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
         lectureOutlineView.selectRowIndexes(IndexSet(integer: lectureOutlineView.selectedRow + 1), byExtendingSelection: false)
     }
     
+    
+    @IBAction func closeLecture(_ sender: Any) {
+        if let lecture = lectureOutlineView.item(atRow: lectureOutlineView.selectedRow) as? PDFDocument {
+            dump(lectureOutlineView.item(atRow: lectureOutlineView.selectedRow))
+            dump(lectureOutlineView.selectedRow)
+            lectureOutlineView.removeItems(at: IndexSet(integer: lectureOutlineView.selectedRow), inParent: nil, withAnimation: NSTableView.AnimationOptions.slideDown)
+            openDocumentNames = openDocumentNames.filter({ !($0 == lecture.documentURL) })
+            openDocuments -= 1
+            selectedDocument = nil
+            lectureOutline.delete(lecture)
+            
+            bookmarkOutline.deleteFor(document: lecture)
+            bookmarkOutlineView.reloadData()
+        }
+    }
+    
+    @IBAction func removeBookmark(_ sender: Any) {
+        if let bookmark = bookmarkOutlineView.item(atRow: bookmarkOutlineView.selectedRow) as? Bookmark {
+            bookmarkOutline.delete(bookmark)
+            bookmarkOutlineView.removeItems(at: IndexSet(integer: bookmarkOutlineView.selectedRow), inParent: nil, withAnimation: NSTableView.AnimationOptions.slideDown)
+        }
+        
+    }
     // Function to add a new bookmark for the current page in the pdf view to the bookmark model.
     // Handles changes to the bookmark outline view.
     @IBAction func newBookmark(_ sender: Any) {
         if let page = pdfView.currentPage {
             let name = "page \(page.label!), \((page.document?.documentURL?.lastPathComponent)!)"
-            let bookmark = Bookmark(name: name, page: page)
+            bookmarkCount += 1
+            let bookmark = Bookmark(id: bookmarkCount, name: name, page: page)
             bookmarkOutline.add(bookmark)
-            bookmarkOutlineView.reloadData()
+            bookmarkOutlineView.insertItems(at: IndexSet(integer: bookmarkOutlineView.numberOfRows), inParent: nil, withAnimation: NSTableView.AnimationOptions.slideDown)
             bookmarkOutlineView.selectRowIndexes(IndexSet(integer: bookmarkOutlineView.numberOfRows - 1), byExtendingSelection: false)
             let cellView = bookmarkOutlineView.rowView(atRow: bookmarkOutlineView.selectedRow, makeIfNecessary: true)?.subviews.first
             let label = cellView?.subviews.first(where: {$0.identifier == NSUserInterfaceItemIdentifier(rawValue: "bookmarkName")}) as? NSTextField
-            bookmarkCount += 1
             label?.stringValue = "New Bookmark \(bookmarkCount)"
             window?.makeFirstResponder(label)
             bookmarkOutlineView.scrollRowToVisible(bookmarkOutlineView.selectedRow)

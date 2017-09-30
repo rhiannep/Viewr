@@ -24,6 +24,10 @@ class LectureSetModel: NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate 
         documents.append(document)
     }
     
+    func delete(_ document: PDFDocument) {
+         documents = documents.filter({ !($0 == document) })
+    }
+    
     func get(byURL: URL) -> PDFDocument? {
         return documents.first(where: {$0.documentURL == byURL})
     }
@@ -63,13 +67,15 @@ class LectureSetModel: NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate 
     
     func outlineViewSelectionDidChange(_ notification: Notification) {
         if let outlineView = notification.object as? NSOutlineView {
-            let item = outlineView.item(atRow: outlineView.selectedRow)
-            window?.lectureSelectionDidChange(item!)
+            if let item = outlineView.item(atRow: outlineView.selectedRow) {
+                window?.lectureSelectionDidChange(item)
+            }
         }
     }
 }
 
 struct Bookmark {
+    let id: Int
     let name: String
     let page: PDFPage
 }
@@ -80,13 +86,16 @@ class BookmarkOutline: NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate 
     private var bookmarkNames = [String]()
     private var owner: DocumentWindowController? = nil
     
-    
-    func add(name: String, page: PDFPage) {
-        bookmarks.append(Bookmark(name: name, page: page))
-    }
-    
     func add(_ bookmark: Bookmark) {
         bookmarks.append(bookmark)
+    }
+    
+    func delete(_ bookmark: Bookmark) {
+        bookmarks = bookmarks.filter({ !($0.id == bookmark.id) })
+    }
+    
+    func deleteFor(document: PDFDocument) {
+        bookmarks = bookmarks.filter({ !($0.page.document == document) })
     }
     
     func get(byName: String) -> Bookmark? {
@@ -101,7 +110,6 @@ class BookmarkOutline: NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate 
         if let cell = sender.representedObject as? NSTableCellView {
             if let bookmark = cell.objectValue as? Bookmark {
                 owner?.lectureSelectionDidChange(bookmark)
-                
             }
         }
     }

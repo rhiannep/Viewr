@@ -56,20 +56,42 @@
                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
                                                             </textField>
-                                                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YBx-eA-Y0t" userLabel="Open Lecture Button">
-                                                                <rect key="frame" x="109" y="4" width="22" height="23"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YBx-eA-Y0t" userLabel="Open Lecture Button">
+                                                                <rect key="frame" x="109" y="3" width="22" height="22"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="22" id="1nl-pL-uxw"/>
+                                                                    <constraint firstAttribute="height" constant="22" id="4eG-VS-e6Q"/>
+                                                                </constraints>
                                                                 <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="hA8-B1-KOh">
                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                     <font key="font" metaFont="system"/>
                                                                 </buttonCell>
                                                                 <connections>
-                                                                    <action selector="openPDF:" target="-2" id="hj9-hI-p4K"/>
+                                                                    <action selector="openPDF:" target="-2" id="T0F-75-ssM"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OKJ-IQ-Y1o" userLabel="Close Lecture Button">
+                                                                <rect key="frame" x="89" y="3" width="22" height="22"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="22" id="91P-Oy-tbM"/>
+                                                                    <constraint firstAttribute="width" constant="22" id="Xrm-34-qqY"/>
+                                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="22" id="buq-iQ-3gH"/>
+                                                                </constraints>
+                                                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="hda-NK-AgM">
+                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                    <font key="font" metaFont="system"/>
+                                                                </buttonCell>
+                                                                <connections>
+                                                                    <action selector="closeLecture:" target="-2" id="oc0-SY-Esc"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="27" id="OCk-jz-Bay"/>
+                                                            <constraint firstItem="OKJ-IQ-Y1o" firstAttribute="top" secondItem="OhU-bc-1sL" secondAttribute="top" constant="2" id="WNh-1r-E49"/>
+                                                            <constraint firstItem="YBx-eA-Y0t" firstAttribute="top" secondItem="OhU-bc-1sL" secondAttribute="top" constant="2" id="b6i-7f-1oC"/>
+                                                            <constraint firstAttribute="trailing" secondItem="OKJ-IQ-Y1o" secondAttribute="trailing" constant="20" id="d0t-DR-Km9"/>
+                                                            <constraint firstAttribute="trailing" secondItem="YBx-eA-Y0t" secondAttribute="trailing" id="yOy-BW-EbM"/>
                                                         </constraints>
                                                     </customView>
                                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QVb-2L-1Nz">
@@ -179,10 +201,26 @@
                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                 </textFieldCell>
                                                             </textField>
+                                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0ww-Eh-cUn" userLabel="remove bookmark button">
+                                                                <rect key="frame" x="89" y="3" width="22" height="22"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="22" id="S8L-Oc-V8Y"/>
+                                                                    <constraint firstAttribute="width" constant="22" id="Sxy-k4-dCc"/>
+                                                                </constraints>
+                                                                <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="AjN-B7-fot">
+                                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                    <font key="font" metaFont="system"/>
+                                                                </buttonCell>
+                                                                <connections>
+                                                                    <action selector="removeBookmark:" target="-2" id="iDX-kT-oh9"/>
+                                                                </connections>
+                                                            </button>
                                                         </subviews>
                                                         <constraints>
                                                             <constraint firstItem="Bgr-uO-9Sm" firstAttribute="top" secondItem="TII-wh-StR" secondAttribute="top" constant="2" id="5ls-OF-Akg"/>
                                                             <constraint firstItem="Bgr-uO-9Sm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wvi-Zk-4a4" secondAttribute="trailing" constant="18" id="Izp-s3-bkG"/>
+                                                            <constraint firstAttribute="trailing" secondItem="0ww-Eh-cUn" secondAttribute="trailing" constant="20" id="Mna-tQ-PIG"/>
+                                                            <constraint firstItem="0ww-Eh-cUn" firstAttribute="top" secondItem="TII-wh-StR" secondAttribute="top" constant="2" id="V6W-iq-rWH"/>
                                                             <constraint firstItem="wvi-Zk-4a4" firstAttribute="top" secondItem="TII-wh-StR" secondAttribute="top" constant="6" id="X6O-ll-C6B"/>
                                                             <constraint firstAttribute="trailing" secondItem="Bgr-uO-9Sm" secondAttribute="trailing" id="e21-gc-GVK"/>
                                                             <constraint firstAttribute="height" constant="27" id="hrF-0C-JFA"/>
@@ -231,7 +269,7 @@
                                                                                             </connections>
                                                                                         </textField>
                                                                                         <textField identifier="bookmarkName" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dcp-YR-wct">
-                                                                                            <rect key="frame" x="-2" y="19" width="104" height="14"/>
+                                                                                            <rect key="frame" x="-2" y="19" width="99" height="14"/>
                                                                                             <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="left" title="bookmark name..." placeholderString="bookmark name..." id="T3n-L9-UsA">
                                                                                                 <font key="font" metaFont="smallSystem"/>
                                                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -260,7 +298,7 @@
                                                                                         <constraint firstItem="IRh-YH-GfT" firstAttribute="top" secondItem="dcp-YR-wct" secondAttribute="bottom" constant="2" id="2yi-o5-5cm"/>
                                                                                         <constraint firstItem="dcp-YR-wct" firstAttribute="top" secondItem="BHQ-cz-aA2" secondAttribute="top" constant="6" id="9vW-pI-gL3"/>
                                                                                         <constraint firstItem="dcp-YR-wct" firstAttribute="leading" secondItem="BHQ-cz-aA2" secondAttribute="leading" id="C0b-aO-40Y"/>
-                                                                                        <constraint firstItem="XmU-Lk-o2l" firstAttribute="leading" secondItem="dcp-YR-wct" secondAttribute="trailing" constant="3" id="G9k-J3-79g"/>
+                                                                                        <constraint firstItem="XmU-Lk-o2l" firstAttribute="leading" secondItem="dcp-YR-wct" secondAttribute="trailing" constant="8" id="G9k-J3-79g" userLabel="Go to bookmark.leading = bookmark name....trailing + 8"/>
                                                                                         <constraint firstItem="XmU-Lk-o2l" firstAttribute="top" secondItem="BHQ-cz-aA2" secondAttribute="top" constant="9" id="JHO-2u-AhF"/>
                                                                                         <constraint firstItem="XmU-Lk-o2l" firstAttribute="leading" secondItem="IRh-YH-GfT" secondAttribute="trailing" constant="8" id="QOi-A1-2cx"/>
                                                                                         <constraint firstItem="IRh-YH-GfT" firstAttribute="leading" secondItem="BHQ-cz-aA2" secondAttribute="leading" id="h2t-Ms-iue"/>
@@ -401,7 +439,7 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="TBh-ur-Zf7"/>
             </connections>
-            <point key="canvasLocation" x="-901" y="-357.5"/>
+            <point key="canvasLocation" x="-841" y="-359"/>
         </window>
         <customObject id="Xdn-cv-iCI" customClass="BookmarkOutline" customModule="Viewr" customModuleProvider="target"/>
         <customObject id="CB3-xo-k6O" userLabel="Lecture Outline" customClass="LectureSetModel" customModule="Viewr" customModuleProvider="target"/>
@@ -411,5 +449,6 @@
         <image name="NSFollowLinkFreestandingTemplate" width="14" height="14"/>
         <image name="NSGoLeftTemplate" width="9" height="12"/>
         <image name="NSGoRightTemplate" width="9" height="12"/>
+        <image name="NSRemoveTemplate" width="11" height="11"/>
     </resources>
 </document>
