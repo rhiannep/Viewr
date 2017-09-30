@@ -23,6 +23,10 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
     @IBOutlet weak var toolBarTitle: NSTextField!
     @IBOutlet weak var toolBar: NSView!
 
+    @IBOutlet var noteBox: NSTextView!
+    
+    let notes = NoteModel()
+    
     var openDocuments = 0
     var openDocumentNames = [URL]()
     var bookmarkCount = 0
@@ -98,6 +102,7 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
     // called when the lecture selction changes in the lecture outline view.
     // scrolls to the appropriate page on the pdfview
     func lectureSelectionDidChange(_ item: Any) {
+//        saveNote()
         if let document = item as? PDFDocument {
             selectedDocument = document
             pdfView.go(to: document.page(at: 0)!)
@@ -105,11 +110,13 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
             lectureOutlineView.selectRowIndexes(IndexSet(integer: lectureOutlineView.row(forItem: document)), byExtendingSelection: false)
         } else if let page = item as? PDFPage {
             selectedDocument = page.document
+            lectureOutlineView.expandItem(selectedDocument)
             pdfView.go(to: page)
             toolBarTitle.stringValue = "\((page.document?.documentURL?.lastPathComponent)!) page \(page.label!)"
         } else if let bookmark = item as? Bookmark {
             lectureSelectionDidChange(bookmark.page)
         }
+//        loadNoteBoxText()
         lectureOutlineView.scrollRowToVisible(lectureOutlineView.selectedRow)
     }
     
@@ -147,6 +154,14 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
             bookmarkOutline.deleteFor(document: lecture)
             bookmarkOutlineView.reloadData()
         }
+    }
+    
+    func loadNoteBoxText() {
+        noteBox = notes.get(page: pdfView.currentPage!)
+    }
+    
+    func saveNote() {
+        notes.add(page: pdfView.currentPage!, text: noteBox.copy() as! NSTextView)
     }
     
     @IBAction func removeBookmark(_ sender: Any) {
