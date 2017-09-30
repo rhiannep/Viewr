@@ -22,6 +22,7 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
     
     var openDocuments = 0
     var openDocumentNames = [URL]()
+    var bookmarkCount = 0
     
     
     convenience init() {
@@ -71,20 +72,25 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
         lectureOutline?.set(window: self)
         bookmarkOutline?.set(owner: self)
         self.outlineView.reloadData()
-
+        NotificationCenter.default.addObserver(self, selector: #selector(DocumentWindowController.pdfViewScolled), name: .PDFViewPageChanged, object: nil)
         // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+    }
+    
+    @objc func pdfViewScolled(_ notification: NSNotification) {
+        let page = pdfView?.currentPage
+        outlineView.selectRowIndexes(IndexSet(integer: outlineView.row(forItem: page)), byExtendingSelection: false)
     }
     
     func lectureSelectionDidChange(_ item: Any) {
         if let document = item as? PDFDocument {
             selectedDocument = document
+            pdfView.go(to: document.page(at: 0)!)
             toolBarTitle.stringValue = (document.documentURL?.lastPathComponent)!
         } else if let page = item as? PDFPage {
             selectedDocument = page.document
             pdfView.go(to: page)
             toolBarTitle.stringValue = "\((page.document?.documentURL?.lastPathComponent)!) page \(page.label!)"
         } else if let bookmark = item as? Bookmark {
-//            bookmarkOutlineView.deselectRow(bookmarkOutlineView.selectedRow)
             outlineView.selectRowIndexes(IndexSet(integer: outlineView.row(forItem: bookmark.page)), byExtendingSelection: false)
         }
         outlineView.scrollRowToVisible(outlineView.selectedRow)
@@ -97,13 +103,11 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
         }
         outlineView.selectRowIndexes(IndexSet(integer: outlineView.selectedRow - 1), byExtendingSelection: false)
     }
+    
     @IBAction func goToNextOutlineItem(_ sender: Any) {
         let this = outlineView.item(atRow: outlineView.selectedRow)
         if let lecture = this as? PDFDocument {
             outlineView.expandItem(lecture)
-        }
-        if outlineView.selectedRow == outlineView.numberOfRows - 1 {
-            return
         }
         outlineView.selectRowIndexes(IndexSet(integer: outlineView.selectedRow + 1), byExtendingSelection: false)
     }
@@ -112,8 +116,14 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
         if let page = pdfView.currentPage {
             let name = "\((page.document?.documentURL?.lastPathComponent)!) page \(page.label!)"
             let bookmark = Bookmark(name: name, page: page)
-            bookmarkOutline.add(name: name, page: page)
+            bookmarkOutline.add(bookmark)
             bookmarkOutlineView.reloadData()
+            bookmarkOutlineView.selectRowIndexes(IndexSet(integer: bookmarkOutlineView.numberOfRows - 1), byExtendingSelection: false)
+            let cellView = bookmarkOutlineView.rowView(atRow: bookmarkOutlineView.selectedRow, makeIfNecessary: true)?.subviews.first
+            let label = cellView?.subviews.first(where: {$0.identifier == NSUserInterfaceItemIdentifier(rawValue: "bookmarkName")}) as? NSTextField
+            bookmarkCount += 1
+            label?.stringValue = "New Bookmark \(bookmarkCount)"
+            window?.makeFirstResponder(label)
         }
     }
 }

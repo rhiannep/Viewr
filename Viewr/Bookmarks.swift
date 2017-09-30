@@ -19,9 +19,14 @@ class BookmarkOutline: NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate 
     private var bookmarks = [Bookmark]()
     private var bookmarkNames = [String]()
     private var owner: DocumentWindowController? = nil
+
     
     func add(name: String, page: PDFPage) {
         bookmarks.append(Bookmark(name: name, page: page))
+    }
+    
+    func add(_ bookmark: Bookmark) {
+        bookmarks.append(bookmark)
     }
     
     func get(byName: String) -> Bookmark? {
@@ -36,6 +41,7 @@ class BookmarkOutline: NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate 
         if let cell = sender.representedObject as? NSTableCellView {
             if let bookmark = cell.objectValue as? Bookmark {
                 owner?.lectureSelectionDidChange(bookmark)
+
             }
         }
     }
@@ -61,13 +67,5 @@ class BookmarkOutline: NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate 
             }
         }
         return view
-    }
-    
-    func outlineViewSelectionDidChange(_ notification: Notification) {
-        if let outlineView = notification.object as? NSOutlineView {
-            if let item = outlineView.item(atRow: outlineView.selectedRow) {
-              owner?.lectureSelectionDidChange(item)
-            }
-        }
     }
 }

@@ -131,7 +131,7 @@
                                                             </subviews>
                                                         </clipView>
                                                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="ctx-A6-Hvd">
-                                                            <rect key="frame" x="0.0" y="77" width="99" height="16"/>
+                                                            <rect key="frame" x="0.0" y="209" width="105" height="16"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </scroller>
                                                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="ez0-qL-MFr">
@@ -157,9 +157,12 @@
                                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="TII-wh-StR" userLabel="Bookmark Header">
                                                         <rect key="frame" x="0.0" y="229" width="131" height="27"/>
                                                         <subviews>
-                                                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bgr-uO-9Sm" userLabel="New bookmark button">
+                                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bgr-uO-9Sm" userLabel="New bookmark button">
                                                                 <rect key="frame" x="109" y="3" width="22" height="22"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="22" id="VUy-43-myi"/>
+                                                                    <constraint firstAttribute="width" constant="22" id="py2-xq-ZT2"/>
+                                                                </constraints>
                                                                 <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="yPa-6d-bK9">
                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                     <font key="font" metaFont="system"/>
@@ -168,9 +171,8 @@
                                                                     <action selector="newBookmark:" target="-2" id="Jih-98-Qgd"/>
                                                                 </connections>
                                                             </button>
-                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wvi-Zk-4a4">
-                                                                <rect key="frame" x="4" y="7" width="89" height="14"/>
-                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wvi-Zk-4a4">
+                                                                <rect key="frame" x="4" y="7" width="63" height="14"/>
                                                                 <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Bookmarks" usesSingleLineMode="YES" id="IRC-Js-WIa">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -179,7 +181,12 @@
                                                             </textField>
                                                         </subviews>
                                                         <constraints>
+                                                            <constraint firstItem="Bgr-uO-9Sm" firstAttribute="top" secondItem="TII-wh-StR" secondAttribute="top" constant="2" id="5ls-OF-Akg"/>
+                                                            <constraint firstItem="Bgr-uO-9Sm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wvi-Zk-4a4" secondAttribute="trailing" constant="18" id="Izp-s3-bkG"/>
+                                                            <constraint firstItem="wvi-Zk-4a4" firstAttribute="top" secondItem="TII-wh-StR" secondAttribute="top" constant="6" id="X6O-ll-C6B"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Bgr-uO-9Sm" secondAttribute="trailing" id="e21-gc-GVK"/>
                                                             <constraint firstAttribute="height" constant="27" id="hrF-0C-JFA"/>
+                                                            <constraint firstItem="wvi-Zk-4a4" firstAttribute="leading" secondItem="TII-wh-StR" secondAttribute="leading" constant="6" id="pT4-Xt-2tE"/>
                                                         </constraints>
                                                     </customView>
                                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="41" horizontalPageScroll="10" verticalLineScroll="41" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fag-f5-gJc" userLabel="Bookmark Scroll view">
@@ -188,7 +195,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="131" height="229"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" enabled="NO" rowHeight="39" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="7" outlineTableColumn="TdW-BH-fw0" id="2KF-bP-01m">
+                                                                <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="39" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="7" outlineTableColumn="TdW-BH-fw0" id="2KF-bP-01m">
                                                                     <rect key="frame" x="0.0" y="0.0" width="131" height="229"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <size key="intercellSpacing" width="3" height="2"/>
@@ -196,12 +203,12 @@
                                                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                                     <tableColumns>
                                                                         <tableColumn width="128" minWidth="40" maxWidth="1000" id="TdW-BH-fw0">
-                                                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" enabled="NO" borderStyle="border" title="Lectures">
+                                                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Lectures">
                                                                                 <font key="font" metaFont="smallSystem"/>
                                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                             </tableHeaderCell>
-                                                                            <textFieldCell key="dataCell" controlSize="small" lineBreakMode="truncatingTail" selectable="YES" editable="YES" enabled="NO" id="DF2-wt-1dY">
+                                                                            <textFieldCell key="dataCell" controlSize="small" lineBreakMode="truncatingTail" selectable="YES" editable="YES" borderStyle="bezel" drawsBackground="YES" id="DF2-wt-1dY">
                                                                                 <font key="font" metaFont="smallSystem"/>
                                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -223,12 +230,12 @@
                                                                                                 <action selector="takeObjectValueFrom:" target="XmU-Lk-o2l" id="Cyb-Y5-aey"/>
                                                                                             </connections>
                                                                                         </textField>
-                                                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dcp-YR-wct">
+                                                                                        <textField identifier="bookmarkName" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dcp-YR-wct">
                                                                                             <rect key="frame" x="-2" y="19" width="113" height="14"/>
                                                                                             <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" alignment="left" title="bookmark name..." placeholderString="bookmark name..." id="T3n-L9-UsA">
                                                                                                 <font key="font" metaFont="smallSystem"/>
-                                                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                             </textFieldCell>
                                                                                         </textField>
                                                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XmU-Lk-o2l" userLabel="Go to bookmark">
@@ -274,7 +281,7 @@
                                                             </subviews>
                                                         </clipView>
                                                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="tJG-qG-Znm">
-                                                            <rect key="frame" x="0.0" y="78" width="99" height="16"/>
+                                                            <rect key="frame" x="0.0" y="213" width="105" height="16"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </scroller>
                                                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="mR1-br-xe5">
