@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A178E7F1F7F24ED004B005B /* OutlineModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A178E7E1F7F24ED004B005B /* OutlineModels.swift */; };
 		1A73BEC31F6B680000298607 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A73BEC21F6B680000298607 /* AppDelegate.swift */; };
 		1A73BEC71F6B680000298607 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A73BEC61F6B680000298607 /* Assets.xcassets */; };
 		1A73BED51F6B680100298607 /* ViewrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A73BED41F6B680100298607 /* ViewrTests.swift */; };
@@ -15,7 +16,6 @@
 		1A73BEF11F6B6DB500298607 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A73BEF01F6B6DB500298607 /* Quartz.framework */; };
 		1A73BEF41F6B6EF500298607 /* DocumentWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A73BEF21F6B6EF500298607 /* DocumentWindowController.swift */; };
 		1A73BEF51F6B6EF500298607 /* DocumentWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A73BEF31F6B6EF500298607 /* DocumentWindow.xib */; };
-		1AA25ADC1F7DAE9F00916768 /* Bookmarks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA25ADB1F7DAE9F00916768 /* Bookmarks.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A178E7E1F7F24ED004B005B /* OutlineModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineModels.swift; sourceTree = "<group>"; };
 		1A73BEBF1F6B680000298607 /* Viewr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Viewr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A73BEC21F6B680000298607 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1A73BEC61F6B680000298607 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -50,7 +51,6 @@
 		1A73BEF01F6B6DB500298607 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		1A73BEF21F6B6EF500298607 /* DocumentWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentWindowController.swift; sourceTree = "<group>"; };
 		1A73BEF31F6B6EF500298607 /* DocumentWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DocumentWindow.xib; sourceTree = "<group>"; };
-		1AA25ADB1F7DAE9F00916768 /* Bookmarks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bookmarks.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +108,7 @@
 				1A73BECB1F6B680000298607 /* Info.plist */,
 				1A73BEED1F6B6C8B00298607 /* MainMenu.xib */,
 				1A73BEF21F6B6EF500298607 /* DocumentWindowController.swift */,
-				1AA25ADB1F7DAE9F00916768 /* Bookmarks.swift */,
+				1A178E7E1F7F24ED004B005B /* OutlineModels.swift */,
 				1A73BEF31F6B6EF500298607 /* DocumentWindow.xib */,
 			);
 			path = Viewr;
@@ -279,7 +279,7 @@
 			files = (
 				1A73BEF41F6B6EF500298607 /* DocumentWindowController.swift in Sources */,
 				1A73BEC31F6B680000298607 /* AppDelegate.swift in Sources */,
-				1AA25ADC1F7DAE9F00916768 /* Bookmarks.swift in Sources */,
+				1A178E7F1F7F24ED004B005B /* OutlineModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
