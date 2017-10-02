@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A178E7F1F7F24ED004B005B /* OutlineModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A178E7E1F7F24ED004B005B /* OutlineModels.swift */; };
+		1A178E7F1F7F24ED004B005B /* BookmarkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A178E7E1F7F24ED004B005B /* BookmarkModel.swift */; };
 		1A178E811F804899004B005B /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A178E801F804899004B005B /* NoteModel.swift */; };
 		1A178E881F809C00004B005B /* PresentationWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A178E861F809C00004B005B /* PresentationWindowController.swift */; };
 		1A178E891F809C00004B005B /* PresentationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A178E871F809C00004B005B /* PresentationWindow.xib */; };
@@ -42,7 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1A178E7E1F7F24ED004B005B /* OutlineModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlineModels.swift; sourceTree = "<group>"; };
+		1A178E7E1F7F24ED004B005B /* BookmarkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkModel.swift; sourceTree = "<group>"; };
 		1A178E801F804899004B005B /* NoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteModel.swift; sourceTree = "<group>"; };
 		1A178E861F809C00004B005B /* PresentationWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationWindowController.swift; sourceTree = "<group>"; };
 		1A178E871F809C00004B005B /* PresentationWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PresentationWindow.xib; sourceTree = "<group>"; };
@@ -175,7 +175,7 @@
 		1AC01B7D1F822BC600FA5E16 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1A178E7E1F7F24ED004B005B /* OutlineModels.swift */,
+				1A178E7E1F7F24ED004B005B /* BookmarkModel.swift */,
 				1AC01B7E1F822C1700FA5E16 /* LectureModel.swift */,
 				1A178E801F804899004B005B /* NoteModel.swift */,
 			);
@@ -326,7 +326,7 @@
 				1A73BEC31F6B680000298607 /* AppDelegate.swift in Sources */,
 				1AC01B7F1F822C1700FA5E16 /* LectureModel.swift in Sources */,
 				1AC01B7A1F820AD300FA5E16 /* SearchPopoverController.swift in Sources */,
-				1A178E7F1F7F24ED004B005B /* OutlineModels.swift in Sources */,
+				1A178E7F1F7F24ED004B005B /* BookmarkModel.swift in Sources */,
 				1A178E811F804899004B005B /* NoteModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

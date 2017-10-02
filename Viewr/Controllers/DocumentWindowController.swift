@@ -11,6 +11,7 @@ import Quartz
 
 // Controller for the main window of the viewer. Coordinates the side bar with the two outline views,
 // the pdf view, and the lecture tool bar.
+// (The fat controller)
 class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextViewDelegate {
     @IBOutlet weak var bookmarkOutline: BookmarkOutline!
     @IBOutlet weak var bookmarkOutlineView: NSOutlineView!
@@ -105,6 +106,7 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
     // change the selcted document in the outline view when the page changes in the pdfview
     @objc func pdfViewScolled(_ notification: NSNotification) {
         let page = (notification.object as? PDFView)?.currentPage
+        lectureOutlineView.expandItem(selectedDocument)
         lectureOutlineView.selectRowIndexes(IndexSet(integer: lectureOutlineView.row(forItem: page)), byExtendingSelection: false)
         for window in presentationWindows {
             window.update(page)
@@ -198,12 +200,13 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
             if (searchBar.stringValue == "") {
                 pdfView.currentSelection = nil
                 pdfView.highlightedSelections = nil
+                searchResultsPop.close()
                 return
             }
                 if let results = pdfView.document?.findString(searchBar.stringValue, with: NSString.CompareOptions.caseInsensitive) {
                     pdfView.highlightedSelections = results
                     updatePDF(results.first as Any)
-                    pdfView.setCurrentSelection(results.first, animate: true)
+                    pdfView.setCurrentSelection(results.first, animate: false)
                     searchResultsPop.show(relativeTo: searchBar.visibleRect, of: searchBar, preferredEdge: .minX)
                     if let popController = searchResultsPop.contentViewController as? SearchPopoverController {
                         popController.prevNext.isEnabled = true
