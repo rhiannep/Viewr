@@ -74,7 +74,7 @@ class LectureSetModel: NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate 
     func outlineViewSelectionDidChange(_ notification: Notification) {
         if let outlineView = notification.object as? NSOutlineView {
             if let item = outlineView.item(atRow: outlineView.selectedRow) {
-                window?.lectureSelectionDidChange(item)
+                window?.updatePDF(item)
             }
         }
     }
@@ -117,7 +117,7 @@ class BookmarkOutline: NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate 
     @IBAction func goToBookmark(_ sender: NSButtonCell) {
         if let cell = sender.representedObject as? NSTableCellView {
             if let bookmark = cell.objectValue as? Bookmark {
-                owner?.lectureSelectionDidChange(bookmark)
+                owner?.updatePDF(bookmark)
             }
         }
     }

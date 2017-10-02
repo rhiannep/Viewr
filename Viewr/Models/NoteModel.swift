@@ -1,5 +1,5 @@
 //
-//  Note.swift
+//  NoteModel.swift
 //  Viewr
 //
 //  Created by Rhianne Price on 1/10/17.

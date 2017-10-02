@@ -25,6 +25,8 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
 
     @IBOutlet var noteBox: NSTextView!
     
+    @IBOutlet weak var searchBar: NSSearchField!
+    @IBOutlet weak var searchResultsPop: NSPopover!
     let notes = NoteModel()
     
     var openDocumentNames = [URL]()
@@ -43,6 +45,7 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
                 let name = selectedDocument?.documentURL?.lastPathComponent
                 window?.title = "\(name!) (\(lectureOutline.count) open)"
                 toolBarTitle.stringValue = name!
+                searchBar.placeholderString = "Search in \(name!)"
                 toolBar.isHidden = false
                 
             }
@@ -123,13 +126,12 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
     
     // called when the lecture selction changes in the lecture outline view.
     // scrolls to the appropriate page on the pdfview
-    func lectureSelectionDidChange(_ item: Any) {
+    func updatePDF(_ item: Any) {
         if let document = item as? PDFDocument {
             selectedDocument = document
             pdfView.go(to: document.page(at: 0)!)
             toolBarTitle.stringValue = (document.documentURL?.lastPathComponent)!
             lectureOutlineView.selectRowIndexes(IndexSet(integer: lectureOutlineView.row(forItem: document)), byExtendingSelection: false)
-//            noteBox.textStorage?.setAttributedString(notes.get(document: document))
             noteBox.textStorage?.setAttributedString(notes.get(document: document))
         } else if let page = item as? PDFPage {
             selectedDocument = page.document
@@ -138,7 +140,10 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
             toolBarTitle.stringValue = "\((page.document?.documentURL?.lastPathComponent)!) page \(page.label!)"
             noteBox.textStorage?.setAttributedString(notes.get(page: page))
         } else if let bookmark = item as? Bookmark {
-            lectureSelectionDidChange(bookmark.page)
+            updatePDF(bookmark.page)
+        } else if let selection = item as? PDFSelection {
+            updatePDF(selection.pages.first!)
+            pdfView.go(to: selection)
         }
         lectureOutlineView.scrollRowToVisible(lectureOutlineView.selectedRow)
     }
@@ -190,12 +195,50 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
     }
     @IBAction func searchBarActivated(_ sender: Any) {
         if let searchBar = sender as? NSSearchField {
-            if let results = pdfView.document?.findString(searchBar.stringValue, with: NSString.CompareOptions.caseInsensitive) {
-                pdfView.highlightedSelections = results
-                pdfView.setCurrentSelection(results.first, animate: true)
+            if (searchBar.stringValue == "") {
+                pdfView.currentSelection = nil
+                pdfView.highlightedSelections = nil
+                return
+            }
+                if let results = pdfView.document?.findString(searchBar.stringValue, with: NSString.CompareOptions.caseInsensitive) {
+                    pdfView.highlightedSelections = results
+                    updatePDF(results.first as Any)
+                    pdfView.setCurrentSelection(results.first, animate: true)
+                    searchResultsPop.show(relativeTo: searchBar.visibleRect, of: searchBar, preferredEdge: .minX)
+                    if let popController = searchResultsPop.contentViewController as? SearchPopoverController {
+                        popController.prevNext.isEnabled = true
+                        if(results.isEmpty) {
+                            popController.searchResultsCountLabel.stringValue = "Nothing like \"\(searchBar.stringValue)\" found in \(selectedDocument?.documentURL?.lastPathComponent ?? "the current document")"
+                            popController.prevNext.isEnabled = false
+                            return
+                        }
+                        popController.searchResultsCountLabel.stringValue = "1 of \(results.count) found"
+                    }
+                }
+        }
+    }
+    
+    // Function for changing the selected search match on the pdfview.
+    // Called by the previous/next controls in the search popover
+    func changeSearchSelection(by: Int) {
+        if(searchResultsPop.isShown) {
+            if let results = pdfView.highlightedSelections {
+                let currentSelectionIndex = results.index(of: pdfView.currentSelection!)
+                let remainder = (currentSelectionIndex! + by) % results.count
+                let nextIndex = remainder >= 0 ? remainder : remainder + results.count
+                
+                // Change the label on the popover view to reflect new selection
+                if let popController = searchResultsPop.contentViewController as? SearchPopoverController {
+                    popController.searchResultsCountLabel.stringValue = "\(nextIndex + 1) of \(results.count) found"
+                }
+                
+                // Go to the new selection and set it as the current selection
+                updatePDF(results[nextIndex])
+                pdfView.setCurrentSelection(results[nextIndex], animate: true)
             }
         }
     }
+    
     @IBAction func zoomToFit(_ sender: Any) {
         pdfView.autoScales = true
     }

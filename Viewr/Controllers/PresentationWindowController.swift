@@ -11,6 +11,10 @@ import Quartz
 
 class PresentationWindowController: NSWindowController, NSWindowDelegate {
     
+    @IBAction func nextSearcher(_ sender: NSSegmentedControl) {
+        dump(sender)
+    }
+    
     @IBOutlet weak var pdfView: PDFView!
     
     var ownerWindow: DocumentWindowController?
@@ -22,8 +26,9 @@ class PresentationWindowController: NSWindowController, NSWindowDelegate {
     
     func update(_ page: PDFPage?) {
         if let newPage = page {
-            pdfView.document = newPage.document
-            pdfView.go(to: newPage)
+            window?.title = "Presenting \(newPage.document?.documentURL?.lastPathComponent ?? "") page \(newPage.label ?? "")"
+            // make a new single page document so that the pdf can't be scrolled in the presentation window
+            pdfView.document = PDFDocument(data: newPage.dataRepresentation)
         } else {
             pdfView.document = nil
         }
@@ -32,12 +37,9 @@ class PresentationWindowController: NSWindowController, NSWindowDelegate {
     override func windowDidLoad() {
         super.windowDidLoad()
         window?.title = "Present"
-
-        // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
     }
     
     func windowWillClose(_ notification: Notification) {
         ownerWindow?.presentationWindows.remove(self)
-        dump(ownerWindow?.presentationWindows)
     }
 }
