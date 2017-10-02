@@ -21,6 +21,7 @@
 		1A73BEF51F6B6EF500298607 /* DocumentWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A73BEF31F6B6EF500298607 /* DocumentWindow.xib */; };
 		1AC01B781F81F81100FA5E16 /* SearchResults.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AC01B771F81F81100FA5E16 /* SearchResults.xib */; };
 		1AC01B7A1F820AD300FA5E16 /* SearchPopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC01B791F820AD300FA5E16 /* SearchPopoverController.swift */; };
+		1AC01B7F1F822C1700FA5E16 /* LectureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC01B7E1F822C1700FA5E16 /* LectureModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		1A73BEF31F6B6EF500298607 /* DocumentWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DocumentWindow.xib; sourceTree = "<group>"; };
 		1AC01B771F81F81100FA5E16 /* SearchResults.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResults.xib; sourceTree = "<group>"; };
 		1AC01B791F820AD300FA5E16 /* SearchPopoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPopoverController.swift; sourceTree = "<group>"; };
+		1AC01B7E1F822C1700FA5E16 /* LectureModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LectureModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				1A178E7E1F7F24ED004B005B /* OutlineModels.swift */,
+				1AC01B7E1F822C1700FA5E16 /* LectureModel.swift */,
 				1A178E801F804899004B005B /* NoteModel.swift */,
 			);
 			path = Models;
@@ -321,6 +324,7 @@
 				1A178E881F809C00004B005B /* PresentationWindowController.swift in Sources */,
 				1A73BEF41F6B6EF500298607 /* DocumentWindowController.swift in Sources */,
 				1A73BEC31F6B680000298607 /* AppDelegate.swift in Sources */,
+				1AC01B7F1F822C1700FA5E16 /* LectureModel.swift in Sources */,
 				1AC01B7A1F820AD300FA5E16 /* SearchPopoverController.swift in Sources */,
 				1A178E7F1F7F24ED004B005B /* OutlineModels.swift in Sources */,
 				1A178E811F804899004B005B /* NoteModel.swift in Sources */,
