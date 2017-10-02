@@ -10,11 +10,17 @@ import Foundation
 
 import Quartz
 
-// A model class for the lectures currently open, used as a data source and delegate for the lecture outline in
+// A model class for the lectures currently open, used as a data source and delegate for the lecture outline in the document window
 class LectureSetModel: NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate {
     
     private var documents = [PDFDocument]()
     private var window: DocumentWindowController? = nil
+    
+    var count: Int {
+        get {
+            return documents.count
+        }
+    }
     
     func set(window: DocumentWindowController) {
         self.window = window
@@ -74,12 +80,14 @@ class LectureSetModel: NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate 
     }
 }
 
+// Struct for representing a bookmark
 struct Bookmark {
     let id: Int
     let name: String
     let page: PDFPage
 }
 
+// Model for storing bookmarks, acts as the data source and delegate for the outline view that lists the book marks
 class BookmarkOutline: NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate {
     
     private var bookmarks = [Bookmark]()

@@ -11,7 +11,7 @@ import Quartz
 
 // Controller for the main window of the viewer. Coordinates the side bar with the two outline views,
 // the pdf view, and the lecture tool bar.
-class DocumentWindowController: NSWindowController, NSWindowDelegate {
+class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextViewDelegate {
     @IBOutlet weak var bookmarkOutline: BookmarkOutline!
     @IBOutlet weak var bookmarkOutlineView: NSOutlineView!
     
@@ -27,9 +27,10 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
     
     let notes = NoteModel()
     
-    var openDocuments = 0
     var openDocumentNames = [URL]()
     var bookmarkCount = 0
+    
+    var presentationWindows = Set<PresentationWindowController>()
     
     // The current document in the view
     var selectedDocument : PDFDocument? = nil {
@@ -40,7 +41,7 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
                 toolBar.isHidden = true
             } else {
                 let name = selectedDocument?.documentURL?.lastPathComponent
-                window?.title = "\(name!) (\(openDocuments) open)"
+                window?.title = "\(name!) (\(lectureOutline.count) open)"
                 toolBarTitle.stringValue = name!
                 toolBar.isHidden = false
             }
@@ -54,7 +55,11 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
         self.lectureOutlineView.reloadData()
         
         // Observer to change the lecture outline view when the pdf is scrolled.
-        NotificationCenter.default.addObserver(self, selector: #selector(DocumentWindowController.pdfViewScolled), name: .PDFViewPageChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(DocumentWindowController.pdfViewScolled), name: .PDFViewPageChanged, object: pdfView)
+    }
+    
+    func windowWillClose(_ notification: Notification) {
+        (NSApplication.shared.delegate as! AppDelegate).openWindows.remove(self)
     }
     
     // convenience initialiser loads the correct view from it's nib file
@@ -78,7 +83,6 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
                         if !self.openDocumentNames.contains(url) {
                             self.lectureOutline.append(document)
                             self.openDocumentNames.append(url)
-                            self.openDocuments += 1
                             self.selectedDocument = document
                         } else {
                             self.selectedDocument = self.lectureOutline.get(byURL: url)
@@ -87,6 +91,7 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
                         self.lectureOutlineView.reloadData()
                         self.selectedDocument = document
                         self.lectureOutlineView.selectRowIndexes(IndexSet(integer: self.lectureOutlineView.row(forItem: document)), byExtendingSelection: false)
+                        self.window?.makeFirstResponder(self.lectureOutlineView)
                     }
                 }
             }
@@ -95,28 +100,45 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
     
     // change the selcted document in the outline view when the page changes in the pdfview
     @objc func pdfViewScolled(_ notification: NSNotification) {
-        let page = pdfView?.currentPage
+        let page = (notification.object as? PDFView)?.currentPage
         lectureOutlineView.selectRowIndexes(IndexSet(integer: lectureOutlineView.row(forItem: page)), byExtendingSelection: false)
+        for window in presentationWindows {
+            window.update(page)
+        }
+    }
+    
+    
+    func textDidChange(_ notification: Notification) {
+        if let textBox = notification.object as? NSTextView {
+             if(textBox == noteBox) {
+                if let document = lectureOutlineView.item(atRow: lectureOutlineView.selectedRow) as? PDFDocument {
+                    notes.add(document: document, text: textBox.attributedString())
+                } else if let page = lectureOutlineView.item(atRow: lectureOutlineView.selectedRow) as? PDFPage {
+                    notes.add(page: page, text: textBox.attributedString())
+                }
+            }
+        }
     }
     
     // called when the lecture selction changes in the lecture outline view.
     // scrolls to the appropriate page on the pdfview
     func lectureSelectionDidChange(_ item: Any) {
-//        saveNote()
         if let document = item as? PDFDocument {
             selectedDocument = document
             pdfView.go(to: document.page(at: 0)!)
             toolBarTitle.stringValue = (document.documentURL?.lastPathComponent)!
             lectureOutlineView.selectRowIndexes(IndexSet(integer: lectureOutlineView.row(forItem: document)), byExtendingSelection: false)
+//            noteBox.textStorage?.setAttributedString(notes.get(document: document))
+            noteBox.textStorage?.setAttributedString(notes.get(document: document))
         } else if let page = item as? PDFPage {
             selectedDocument = page.document
             lectureOutlineView.expandItem(selectedDocument)
             pdfView.go(to: page)
             toolBarTitle.stringValue = "\((page.document?.documentURL?.lastPathComponent)!) page \(page.label!)"
+            noteBox.textStorage?.setAttributedString(notes.get(page: page))
         } else if let bookmark = item as? Bookmark {
             lectureSelectionDidChange(bookmark.page)
         }
-//        loadNoteBoxText()
         lectureOutlineView.scrollRowToVisible(lectureOutlineView.selectedRow)
     }
     
@@ -143,25 +165,19 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
     
     @IBAction func closeLecture(_ sender: Any) {
         if let lecture = lectureOutlineView.item(atRow: lectureOutlineView.selectedRow) as? PDFDocument {
-            dump(lectureOutlineView.item(atRow: lectureOutlineView.selectedRow))
-            dump(lectureOutlineView.selectedRow)
-            lectureOutlineView.removeItems(at: IndexSet(integer: lectureOutlineView.selectedRow), inParent: nil, withAnimation: NSTableView.AnimationOptions.slideDown)
             openDocumentNames = openDocumentNames.filter({ !($0 == lecture.documentURL) })
-            openDocuments -= 1
             selectedDocument = nil
             lectureOutline.delete(lecture)
-            
+            lectureOutlineView.reloadData()
             bookmarkOutline.deleteFor(document: lecture)
             bookmarkOutlineView.reloadData()
         }
     }
-    
-    func loadNoteBoxText() {
-        noteBox = notes.get(page: pdfView.currentPage!)
-    }
-    
-    func saveNote() {
-        notes.add(page: pdfView.currentPage!, text: noteBox.copy() as! NSTextView)
+    @IBAction func present(_ sender: Any) {
+        let presentationWindow = PresentationWindowController(owner: self)
+        presentationWindow.showWindow(self)
+        presentationWindow.update(pdfView.currentPage!)
+        presentationWindows.insert(presentationWindow)
     }
     
     @IBAction func removeBookmark(_ sender: Any) {
@@ -170,6 +186,9 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate {
             bookmarkOutlineView.removeItems(at: IndexSet(integer: bookmarkOutlineView.selectedRow), inParent: nil, withAnimation: NSTableView.AnimationOptions.slideDown)
         }
         
+    }
+    @IBAction func zoomToFit(_ sender: Any) {
+        pdfView.autoScales = true
     }
     // Function to add a new bookmark for the current page in the pdf view to the bookmark model.
     // Handles changes to the bookmark outline view.

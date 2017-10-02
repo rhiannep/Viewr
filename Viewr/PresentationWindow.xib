@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <plugIn identifier="com.apple.pdfkit.ibplugin" version="13196"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="PresentationWindowController" customModule="Viewr" customModuleProvider="target">
+            <connections>
+                <outlet property="pdfView" destination="vEn-18-Fsg" id="aLk-eS-RIu"/>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+            <view key="contentView" wantsLayer="YES" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <pdfView autoresizesSubviews="NO" wantsLayer="YES" displayMode="singlePage" autoScales="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vEn-18-Fsg">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                    </pdfView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="vEn-18-Fsg" firstAttribute="width" secondItem="se5-gp-TjO" secondAttribute="width" id="BWE-p0-Nnk"/>
+                    <constraint firstAttribute="trailing" secondItem="vEn-18-Fsg" secondAttribute="trailing" id="Meb-IL-q1q"/>
+                    <constraint firstItem="vEn-18-Fsg" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" id="R90-oX-9Or"/>
+                    <constraint firstItem="vEn-18-Fsg" firstAttribute="height" secondItem="se5-gp-TjO" secondAttribute="height" id="aPQ-aQ-XQr"/>
+                    <constraint firstItem="vEn-18-Fsg" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" id="dg0-RY-tTo"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+        </window>
+    </objects>
+</document>
