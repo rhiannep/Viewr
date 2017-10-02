@@ -44,6 +44,7 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
                 window?.title = "\(name!) (\(lectureOutline.count) open)"
                 toolBarTitle.stringValue = name!
                 toolBar.isHidden = false
+                
             }
         }
     }
@@ -186,6 +187,14 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
             bookmarkOutlineView.removeItems(at: IndexSet(integer: bookmarkOutlineView.selectedRow), inParent: nil, withAnimation: NSTableView.AnimationOptions.slideDown)
         }
         
+    }
+    @IBAction func searchBarActivated(_ sender: Any) {
+        if let searchBar = sender as? NSSearchField {
+            if let results = pdfView.document?.findString(searchBar.stringValue, with: NSString.CompareOptions.caseInsensitive) {
+                pdfView.highlightedSelections = results
+                pdfView.setCurrentSelection(results.first, animate: true)
+            }
+        }
     }
     @IBAction func zoomToFit(_ sender: Any) {
         pdfView.autoScales = true
