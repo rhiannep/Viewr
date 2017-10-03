@@ -73,4 +73,15 @@ class BookmarkOutline: NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate 
         }
         return view
     }
+    
+    func outlineViewSelectionDidChange(_ notification: Notification) {
+        if let outlineView = notification.object as? NSOutlineView {
+            owner?.bookmarkCloseButton.isEnabled = false
+            if let item = outlineView.item(atRow: outlineView.selectedRow) {
+                if item is Bookmark {
+                    owner?.bookmarkCloseButton.isEnabled = true
+                }
+            }
+        }
+    }
 }

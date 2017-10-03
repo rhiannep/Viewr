@@ -73,6 +73,23 @@ class LectureSetModel: NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate 
     func outlineViewSelectionDidChange(_ notification: Notification) {
         if let outlineView = notification.object as? NSOutlineView {
             if let item = outlineView.item(atRow: outlineView.selectedRow) {
+                if outlineView.selectedRow == outlineView.numberOfRows - 1 {
+                    if item is PDFPage {
+                        window?.nextButton.isEnabled = false
+                    }
+                } else {
+                    window?.nextButton.isEnabled = true
+                }
+                if outlineView.selectedRow == 0 {
+                    window?.previousButton.isEnabled = false
+                } else {
+                    window?.previousButton.isEnabled = true
+                }
+                if item is PDFDocument {
+                    window?.closeButton.isEnabled = true
+                } else {
+                    window?.closeButton.isEnabled = false
+                }
                 window?.updatePDF(item)
             }
         }

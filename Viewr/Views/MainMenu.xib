@@ -69,7 +69,11 @@
                                     <action selector="newDocumentWindow:" target="gBA-zP-9jM" id="3rn-yT-jUy"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9"/>
+                            <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
+                                <connections>
+                                    <action selector="openPDF:" target="-1" id="205-Wd-wXV"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Open Recent" id="tXI-mr-wws">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Open Recent" systemMenu="recentDocuments" id="oas-Oc-fiZ">
@@ -581,6 +585,11 @@
                                 <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                 <connections>
                                     <action selector="toggleFullScreen:" target="-1" id="dU3-MA-1Rq"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Present" keyEquivalent="p" id="U6y-Ik-QgU">
+                                <connections>
+                                    <action selector="present:" target="-1" id="Dds-Tv-4RM"/>
                                 </connections>
                             </menuItem>
                         </items>

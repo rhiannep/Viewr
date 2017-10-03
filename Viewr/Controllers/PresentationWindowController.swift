@@ -37,6 +37,9 @@ class PresentationWindowController: NSWindowController, NSWindowDelegate {
     override func windowDidLoad() {
         super.windowDidLoad()
         window?.title = "Present"
+        if let screen = NSScreen.main {
+            window?.setFrame(screen.visibleFrame, display: true, animate: true)
+        }
     }
     
     func windowWillClose(_ notification: Notification) {

@@ -11,13 +11,20 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="DocumentWindowController" customModule="Viewr" customModuleProvider="target">
             <connections>
+                <outlet property="bookmarkCloseButton" destination="0ww-Eh-cUn" id="uO1-vU-wjK"/>
                 <outlet property="bookmarkOutline" destination="Xdn-cv-iCI" id="TMG-un-cqD"/>
                 <outlet property="bookmarkOutlineView" destination="2KF-bP-01m" id="Top-sX-ewr"/>
+                <outlet property="bookmarkView" destination="4r9-8t-bM1" id="ssm-Od-zOs"/>
+                <outlet property="closeButton" destination="OKJ-IQ-Y1o" id="GRC-J1-0TM"/>
                 <outlet property="lectureOutline" destination="CB3-xo-k6O" id="BAo-Bu-UyL"/>
                 <outlet property="lectureOutlineView" destination="jGG-H3-MyW" id="M6D-sI-l44"/>
+                <outlet property="nextButton" destination="P3M-1O-IDe" id="5qD-Wu-HaL"/>
                 <outlet property="noteBox" destination="phV-4s-l04" id="1cs-hM-4m6"/>
+                <outlet property="openButton" destination="YBx-eA-Y0t" id="0uJ-gq-Emi"/>
                 <outlet property="pdfView" destination="N2z-GS-5cq" id="5Md-pl-ikk"/>
+                <outlet property="previousButton" destination="Z1Y-CM-Yhn" id="D4w-nU-jfd"/>
                 <outlet property="searchBar" destination="9bF-FF-heI" id="6wu-T3-tmE"/>
+                <outlet property="searchBarHeader" destination="tY4-Jx-oPb" id="2y8-Yk-eME"/>
                 <outlet property="searchResultsPop" destination="53B-sh-rhu" id="5VF-iS-ntC"/>
                 <outlet property="toolBar" destination="P9l-8t-9zQ" id="Dcg-2v-9Ye"/>
                 <outlet property="toolBarTitle" destination="LFu-fn-RMT" id="Kgc-hY-dgm"/>
@@ -26,10 +33,9 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="aFg-dL-EuN">
+        <window title="Viewr" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" tabbingMode="disallowed" id="aFg-dL-EuN">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="109" y="131" width="718" height="509"/>
+            <rect key="contentRect" x="0.0" y="0.0" width="718" height="509"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
             <view key="contentView" id="bNH-0s-biZ">
                 <rect key="frame" x="0.0" y="0.0" width="718" height="509"/>
@@ -42,19 +48,26 @@
                                 <rect key="frame" x="0.0" y="0.0" width="131" height="509"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
-                                    <splitView arrangesAllSubviews="NO" dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="KIT-2z-2pL">
+                                    <splitView arrangesAllSubviews="NO" dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="KIT-2z-2pL" userLabel="Lectures/Bookmarks split">
                                         <rect key="frame" x="0.0" y="0.0" width="131" height="509"/>
                                         <subviews>
                                             <customView id="bmk-Us-alr" userLabel="Lecture List">
-                                                <rect key="frame" x="0.0" y="0.0" width="131" height="252"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="131" height="508"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
                                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="OhU-bc-1sL" userLabel="Lecture Header">
-                                                        <rect key="frame" x="0.0" y="225" width="131" height="27"/>
+                                                        <rect key="frame" x="0.0" y="481" width="131" height="27"/>
                                                         <subviews>
-                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="saI-Kn-yd7">
-                                                                <rect key="frame" x="4" y="7" width="77" height="14"/>
-                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kbJ-gV-qqO">
+                                                                <rect key="frame" x="3" y="3" width="22" height="22"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="22" id="0d8-z3-8gS"/>
+                                                                    <constraint firstAttribute="height" constant="22" id="YCM-kE-YYA"/>
+                                                                </constraints>
+                                                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSFlowViewTemplate" id="W1s-lU-zJm"/>
+                                                            </imageView>
+                                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="saI-Kn-yd7">
+                                                                <rect key="frame" x="26" y="7" width="50" height="14"/>
                                                                 <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Lectures" usesSingleLineMode="YES" id="Kmg-Lx-dYd">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -92,21 +105,25 @@
                                                             </button>
                                                         </subviews>
                                                         <constraints>
+                                                            <constraint firstItem="saI-Kn-yd7" firstAttribute="centerY" secondItem="OhU-bc-1sL" secondAttribute="centerY" id="09I-K7-mWZ"/>
                                                             <constraint firstAttribute="height" constant="27" id="OCk-jz-Bay"/>
                                                             <constraint firstItem="OKJ-IQ-Y1o" firstAttribute="top" secondItem="OhU-bc-1sL" secondAttribute="top" constant="2" id="WNh-1r-E49"/>
+                                                            <constraint firstItem="saI-Kn-yd7" firstAttribute="leading" secondItem="kbJ-gV-qqO" secondAttribute="trailing" constant="3" id="adI-iy-eIr"/>
                                                             <constraint firstItem="YBx-eA-Y0t" firstAttribute="top" secondItem="OhU-bc-1sL" secondAttribute="top" constant="2" id="b6i-7f-1oC"/>
                                                             <constraint firstAttribute="trailing" secondItem="OKJ-IQ-Y1o" secondAttribute="trailing" constant="20" id="d0t-DR-Km9"/>
+                                                            <constraint firstItem="kbJ-gV-qqO" firstAttribute="leading" secondItem="OhU-bc-1sL" secondAttribute="leading" constant="3" id="kFM-sC-hev"/>
+                                                            <constraint firstItem="kbJ-gV-qqO" firstAttribute="centerY" secondItem="OhU-bc-1sL" secondAttribute="centerY" id="pZT-91-aM6"/>
                                                             <constraint firstAttribute="trailing" secondItem="YBx-eA-Y0t" secondAttribute="trailing" id="yOy-BW-EbM"/>
                                                         </constraints>
                                                     </customView>
                                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QVb-2L-1Nz">
-                                                        <rect key="frame" x="0.0" y="0.0" width="131" height="225"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="131" height="481"/>
                                                         <clipView key="contentView" drawsBackground="NO" id="ryS-hH-DkB">
-                                                            <rect key="frame" x="0.0" y="0.0" width="131" height="225"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="131" height="481"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="8" outlineTableColumn="c5C-8g-6JL" id="jGG-H3-MyW">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="131" height="225"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="131" height="481"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -177,7 +194,7 @@
                                                     <constraint firstItem="QVb-2L-1Nz" firstAttribute="leading" secondItem="bmk-Us-alr" secondAttribute="leading" id="eeP-XN-uPS"/>
                                                 </constraints>
                                             </customView>
-                                            <customView id="4r9-8t-bM1" userLabel="Bookmark List">
+                                            <customView hidden="YES" id="4r9-8t-bM1" userLabel="Bookmark List">
                                                 <rect key="frame" x="0.0" y="253" width="131" height="256"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
@@ -193,13 +210,15 @@
                                                                 <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" imageScaling="proportionallyDown" inset="2" id="yPa-6d-bK9">
                                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                     <font key="font" metaFont="system"/>
+                                                                    <string key="keyEquivalent">d</string>
+                                                                    <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                                                 </buttonCell>
                                                                 <connections>
                                                                     <action selector="newBookmark:" target="-2" id="Jih-98-Qgd"/>
                                                                 </connections>
                                                             </button>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wvi-Zk-4a4">
-                                                                <rect key="frame" x="4" y="7" width="63" height="14"/>
+                                                                <rect key="frame" x="26" y="7" width="63" height="14"/>
                                                                 <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Bookmarks" usesSingleLineMode="YES" id="IRC-Js-WIa">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -220,16 +239,26 @@
                                                                     <action selector="removeBookmark:" target="-2" id="iDX-kT-oh9"/>
                                                                 </connections>
                                                             </button>
+                                                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jpj-Yp-ynH">
+                                                                <rect key="frame" x="3" y="3" width="22" height="22"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="22" id="CNb-dR-zbE"/>
+                                                                    <constraint firstAttribute="height" constant="22" id="cVq-7Z-2oz"/>
+                                                                </constraints>
+                                                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSBookmarksTemplate" id="I2r-uM-uFh"/>
+                                                            </imageView>
                                                         </subviews>
                                                         <constraints>
                                                             <constraint firstItem="Bgr-uO-9Sm" firstAttribute="top" secondItem="TII-wh-StR" secondAttribute="top" constant="2" id="5ls-OF-Akg"/>
                                                             <constraint firstItem="Bgr-uO-9Sm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wvi-Zk-4a4" secondAttribute="trailing" constant="18" id="Izp-s3-bkG"/>
                                                             <constraint firstAttribute="trailing" secondItem="0ww-Eh-cUn" secondAttribute="trailing" constant="20" id="Mna-tQ-PIG"/>
+                                                            <constraint firstItem="wvi-Zk-4a4" firstAttribute="leading" secondItem="Jpj-Yp-ynH" secondAttribute="trailing" constant="3" id="PPr-9M-Oj8"/>
                                                             <constraint firstItem="0ww-Eh-cUn" firstAttribute="top" secondItem="TII-wh-StR" secondAttribute="top" constant="2" id="V6W-iq-rWH"/>
+                                                            <constraint firstItem="Jpj-Yp-ynH" firstAttribute="leading" secondItem="TII-wh-StR" secondAttribute="leading" constant="3" id="VMN-W2-8hv"/>
                                                             <constraint firstItem="wvi-Zk-4a4" firstAttribute="top" secondItem="TII-wh-StR" secondAttribute="top" constant="6" id="X6O-ll-C6B"/>
+                                                            <constraint firstItem="Jpj-Yp-ynH" firstAttribute="centerY" secondItem="TII-wh-StR" secondAttribute="centerY" id="ZEW-4R-a6f"/>
                                                             <constraint firstAttribute="trailing" secondItem="Bgr-uO-9Sm" secondAttribute="trailing" id="e21-gc-GVK"/>
                                                             <constraint firstAttribute="height" constant="27" id="hrF-0C-JFA"/>
-                                                            <constraint firstItem="wvi-Zk-4a4" firstAttribute="leading" secondItem="TII-wh-StR" secondAttribute="leading" constant="6" id="pT4-Xt-2tE"/>
                                                         </constraints>
                                                     </customView>
                                                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="41" horizontalPageScroll="10" verticalLineScroll="41" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fag-f5-gJc" userLabel="Bookmark Scroll view">
@@ -361,18 +390,51 @@
                                 <rect key="frame" x="132" y="0.0" width="586" height="509"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <subviews>
-                                    <splitView arrangesAllSubviews="NO" dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="1d4-wj-LKs">
+                                    <splitView arrangesAllSubviews="NO" dividerStyle="thin" translatesAutoresizingMaskIntoConstraints="NO" id="1d4-wj-LKs" userLabel="PDF/Toolbar split">
                                         <rect key="frame" x="0.0" y="0.0" width="586" height="509"/>
                                         <subviews>
                                             <customView id="RCM-M6-BOO" userLabel="PDF Container">
                                                 <rect key="frame" x="0.0" y="0.0" width="586" height="508"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <subviews>
-                                                    <pdfView autoresizesSubviews="NO" fixedFrame="YES" displayMode="singlePage" autoScales="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N2z-GS-5cq">
-                                                        <rect key="frame" x="0.0" y="0.0" width="586" height="509"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                                    <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tY4-Jx-oPb" userLabel="Search Header">
+                                                        <rect key="frame" x="0.0" y="481" width="586" height="27"/>
+                                                        <subviews>
+                                                            <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9bF-FF-heI">
+                                                                <rect key="frame" x="440" y="3" width="144" height="22"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="22" id="qK0-Fm-xo7"/>
+                                                                </constraints>
+                                                                <searchFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" borderStyle="bezel" bezelStyle="round" sendsSearchStringImmediately="YES" id="Bn3-R3-qVA">
+                                                                    <font key="font" metaFont="system"/>
+                                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                </searchFieldCell>
+                                                                <connections>
+                                                                    <action selector="searchBarActivated:" target="-2" id="XHo-B8-cZQ"/>
+                                                                </connections>
+                                                            </searchField>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="9bF-FF-heI" secondAttribute="trailing" constant="2.5" id="5GK-n0-8Tf"/>
+                                                            <constraint firstItem="9bF-FF-heI" firstAttribute="centerY" secondItem="tY4-Jx-oPb" secondAttribute="centerY" id="ILU-Fd-ZWq"/>
+                                                            <constraint firstAttribute="height" constant="27" id="T7P-7m-ndd"/>
+                                                            <constraint firstItem="9bF-FF-heI" firstAttribute="leading" secondItem="tY4-Jx-oPb" secondAttribute="centerX" multiplier="1.5" id="TLy-ub-das"/>
+                                                        </constraints>
+                                                    </customView>
+                                                    <pdfView autoresizesSubviews="NO" displayMode="singlePage" autoScales="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N2z-GS-5cq">
+                                                        <rect key="frame" x="0.0" y="0.0" width="586" height="481"/>
                                                     </pdfView>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="tY4-Jx-oPb" firstAttribute="top" secondItem="RCM-M6-BOO" secondAttribute="top" id="JMq-Bl-v8s"/>
+                                                    <constraint firstItem="N2z-GS-5cq" firstAttribute="leading" secondItem="RCM-M6-BOO" secondAttribute="leading" id="LvO-0S-803"/>
+                                                    <constraint firstItem="tY4-Jx-oPb" firstAttribute="leading" secondItem="RCM-M6-BOO" secondAttribute="leading" id="Vya-iJ-lcv"/>
+                                                    <constraint firstAttribute="trailing" secondItem="tY4-Jx-oPb" secondAttribute="trailing" id="chj-hC-RCf"/>
+                                                    <constraint firstAttribute="bottom" secondItem="N2z-GS-5cq" secondAttribute="bottom" id="eXU-S6-Db3"/>
+                                                    <constraint firstItem="N2z-GS-5cq" firstAttribute="top" secondItem="tY4-Jx-oPb" secondAttribute="bottom" id="j4O-YV-sbo"/>
+                                                    <constraint firstAttribute="trailing" secondItem="N2z-GS-5cq" secondAttribute="trailing" id="nFL-tC-tBD"/>
+                                                </constraints>
                                             </customView>
                                             <customView hidden="YES" id="P9l-8t-9zQ">
                                                 <rect key="frame" x="0.0" y="425" width="586" height="84"/>
@@ -407,31 +469,17 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </scroller>
                                                     </scrollView>
-                                                    <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9bF-FF-heI">
-                                                        <rect key="frame" x="303" y="35" width="278" height="22"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="22" id="qK0-Fm-xo7"/>
-                                                        </constraints>
-                                                        <searchFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" usesSingleLineMode="YES" bezelStyle="round" sendsSearchStringImmediately="YES" id="Bn3-R3-qVA">
-                                                            <font key="font" metaFont="system"/>
-                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                        </searchFieldCell>
-                                                        <connections>
-                                                            <action selector="searchBarActivated:" target="-2" id="XHo-B8-cZQ"/>
-                                                        </connections>
-                                                    </searchField>
                                                     <box boxType="custom" cornerRadius="2" title="Box" transparent="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Td2-xn-3vA" userLabel="Button Box">
-                                                        <rect key="frame" x="303" y="7" width="278" height="23"/>
+                                                        <rect key="frame" x="303" y="7" width="278" height="50"/>
                                                         <view key="contentView" id="938-ZI-tLl">
-                                                            <rect key="frame" x="1" y="1" width="276" height="21"/>
+                                                            <rect key="frame" x="1" y="1" width="276" height="48"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="joi-iW-IPF" userLabel="Control Box">
-                                                                    <rect key="frame" x="36" y="-1" width="205" height="23"/>
+                                                                    <rect key="frame" x="36" y="-1" width="205" height="50"/>
                                                                     <subviews>
                                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="odg-dP-QDO" userLabel="zoom out">
-                                                                            <rect key="frame" x="0.0" y="-3" width="30" height="30"/>
+                                                                            <rect key="frame" x="0.0" y="10" width="30" height="30"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="30" id="3kl-kl-gRj"/>
                                                                                 <constraint firstAttribute="height" constant="30" id="mLS-ln-64z"/>
@@ -447,7 +495,7 @@
                                                                             </connections>
                                                                         </button>
                                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PBR-1q-OeZ" userLabel="Present">
-                                                                            <rect key="frame" x="105" y="-3" width="30" height="30"/>
+                                                                            <rect key="frame" x="105" y="10" width="30" height="30"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="30" id="5nM-wt-01V"/>
                                                                                 <constraint firstAttribute="height" constant="30" id="oXT-ww-Faq"/>
@@ -461,7 +509,7 @@
                                                                             </connections>
                                                                         </button>
                                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AUa-IC-93d" userLabel="fit">
-                                                                            <rect key="frame" x="70" y="-3" width="30" height="30"/>
+                                                                            <rect key="frame" x="70" y="10" width="30" height="30"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="30" id="Vam-af-j0b"/>
                                                                                 <constraint firstAttribute="width" constant="30" id="tEg-qV-ItY"/>
@@ -473,11 +521,11 @@
                                                                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                                                             </buttonCell>
                                                                             <connections>
-                                                                                <action selector="zoomToFit:" target="-2" id="Myx-cF-TZy"/>
+                                                                                <action selector="zoomToFit:" target="-1" id="OXQ-4q-SOi"/>
                                                                             </connections>
                                                                         </button>
                                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Dow-gs-4Ek" userLabel="zoom in">
-                                                                            <rect key="frame" x="35" y="-3" width="30" height="30"/>
+                                                                            <rect key="frame" x="35" y="10" width="30" height="30"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="30" id="M94-yH-O3V"/>
                                                                                 <constraint firstAttribute="height" constant="30" id="VmU-gu-eKf"/>
@@ -493,7 +541,7 @@
                                                                             </connections>
                                                                         </button>
                                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Z1Y-CM-Yhn" userLabel="previous">
-                                                                            <rect key="frame" x="140" y="-3" width="30" height="30"/>
+                                                                            <rect key="frame" x="140" y="10" width="30" height="30"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="30" id="98U-AH-uMU"/>
                                                                                 <constraint firstAttribute="height" constant="30" id="Myy-1C-Fs3"/>
@@ -509,7 +557,7 @@
                                                                             </connections>
                                                                         </button>
                                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P3M-1O-IDe" userLabel="next">
-                                                                            <rect key="frame" x="175" y="-3" width="30" height="30"/>
+                                                                            <rect key="frame" x="175" y="10" width="30" height="30"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="30" id="2wo-ta-8cC"/>
                                                                                 <constraint firstAttribute="width" constant="30" id="hpe-Bo-33s"/>
@@ -569,13 +617,10 @@
                                                     <constraint firstItem="cPx-0e-o2H" firstAttribute="width" secondItem="P9l-8t-9zQ" secondAttribute="width" multiplier="0.5" id="IKd-qK-y5H"/>
                                                     <constraint firstItem="cPx-0e-o2H" firstAttribute="leading" secondItem="P9l-8t-9zQ" secondAttribute="leading" constant="5" id="WJI-eu-KGn"/>
                                                     <constraint firstItem="LFu-fn-RMT" firstAttribute="top" secondItem="P9l-8t-9zQ" secondAttribute="top" constant="6" id="ZVU-ip-8Rg"/>
-                                                    <constraint firstItem="9bF-FF-heI" firstAttribute="top" secondItem="cPx-0e-o2H" secondAttribute="top" id="aGL-9s-eIy"/>
-                                                    <constraint firstItem="9bF-FF-heI" firstAttribute="width" secondItem="Td2-xn-3vA" secondAttribute="width" id="efU-NB-UFq"/>
                                                     <constraint firstItem="Td2-xn-3vA" firstAttribute="leading" secondItem="cPx-0e-o2H" secondAttribute="trailing" constant="5" id="gy6-xG-O7r"/>
-                                                    <constraint firstItem="Td2-xn-3vA" firstAttribute="top" secondItem="9bF-FF-heI" secondAttribute="bottom" constant="5" id="jO6-HA-1jw"/>
                                                     <constraint firstAttribute="bottom" secondItem="cPx-0e-o2H" secondAttribute="bottom" constant="7" id="jYl-3v-HY8"/>
                                                     <constraint firstItem="cPx-0e-o2H" firstAttribute="top" secondItem="P9l-8t-9zQ" secondAttribute="top" constant="27" id="n2v-f9-qdk"/>
-                                                    <constraint firstItem="9bF-FF-heI" firstAttribute="leading" secondItem="Td2-xn-3vA" secondAttribute="leading" id="rhO-ed-A7d"/>
+                                                    <constraint firstItem="Td2-xn-3vA" firstAttribute="top" secondItem="cPx-0e-o2H" secondAttribute="top" id="w1G-yc-SJF"/>
                                                     <constraint firstItem="LFu-fn-RMT" firstAttribute="leading" secondItem="P9l-8t-9zQ" secondAttribute="leading" constant="6" id="xRs-Kg-Nu6"/>
                                                 </constraints>
                                             </customView>
@@ -617,7 +662,7 @@
         </window>
         <customObject id="Xdn-cv-iCI" customClass="BookmarkOutline" customModule="Viewr" customModuleProvider="target"/>
         <customObject id="CB3-xo-k6O" userLabel="Lecture Outline" customClass="LectureSetModel" customModule="Viewr" customModuleProvider="target"/>
-        <viewController nibName="SearchResults" id="5Id-nb-AWJ" userLabel="Popover View Controller" customClass="SearchPopoverController" customModule="Viewr" customModuleProvider="target">
+        <viewController nibName="SearchResultsView" id="5Id-nb-AWJ" userLabel="Popover View Controller" customClass="SearchPopoverController" customModule="Viewr" customModuleProvider="target">
             <connections>
                 <outlet property="documentWindowController" destination="-2" id="TyP-il-yBA"/>
             </connections>
@@ -630,8 +675,10 @@
     </objects>
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="NSBookmarksTemplate" width="17" height="18"/>
         <image name="NSEnterFullScreenTemplate" width="15" height="15"/>
         <image name="NSExitFullScreenTemplate" width="15" height="15"/>
+        <image name="NSFlowViewTemplate" width="18" height="10"/>
         <image name="NSFollowLinkFreestandingTemplate" width="14" height="14"/>
         <image name="NSGoLeftTemplate" width="9" height="12"/>
         <image name="NSGoRightTemplate" width="9" height="12"/>

@@ -13,12 +13,20 @@ import Quartz
 // the pdf view, and the lecture tool bar.
 // (The fat controller)
 class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextViewDelegate {
+    @IBOutlet weak var openButton: NSButton!
+    @IBOutlet weak var closeButton: NSButton!
+    
+    @IBOutlet weak var bookmarkCloseButton: NSButton!
     @IBOutlet weak var bookmarkOutline: BookmarkOutline!
     @IBOutlet weak var bookmarkOutlineView: NSOutlineView!
     
+    @IBOutlet weak var bookmarkView: NSView!
     @IBOutlet weak var lectureOutline: LectureSetModel!
     @IBOutlet weak var lectureOutlineView: NSOutlineView!
     
+    @IBOutlet weak var nextButton: NSButton!
+    @IBOutlet weak var previousButton: NSButton!
+    @IBOutlet weak var searchBarHeader: NSView!
     @IBOutlet weak var pdfView: PDFView!
     
     @IBOutlet weak var toolBarTitle: NSTextField!
@@ -42,12 +50,18 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
             if selectedDocument == nil {
                 window?.title = "Viewr"
                 toolBar.isHidden = true
+                searchBarHeader.isHidden = true
+                if lectureOutline.count == 0 {
+                    bookmarkView.isHidden = true
+                }
             } else {
                 let name = selectedDocument?.documentURL?.lastPathComponent
                 window?.title = "\(name!) (\(lectureOutline.count) open)"
                 toolBarTitle.stringValue = name!
                 searchBar.placeholderString = "Search in \(name!)"
                 toolBar.isHidden = false
+                searchBarHeader.isHidden = false
+                bookmarkView.isHidden = false
                 
             }
         }
@@ -55,15 +69,25 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
     
     override func windowDidLoad() {
         super.windowDidLoad()
+        if let screen = NSScreen.main {
+            window?.setFrame(screen.visibleFrame, display: true, animate: true)
+        }
         lectureOutline?.set(window: self)
         bookmarkOutline?.set(owner: self)
         self.lectureOutlineView.reloadData()
+        window?.title = "Viewr"
+        closeButton.isEnabled = false
+        bookmarkCloseButton.isEnabled = false
+
         
         // Observer to change the lecture outline view when the pdf is scrolled.
         NotificationCenter.default.addObserver(self, selector: #selector(DocumentWindowController.pdfViewScolled), name: .PDFViewPageChanged, object: pdfView)
     }
     
     func windowWillClose(_ notification: Notification) {
+        for window in presentationWindows {
+            window.close()
+        }
         (NSApplication.shared.delegate as! AppDelegate).openWindows.remove(self)
     }
     
@@ -174,18 +198,21 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
     @IBAction func closeLecture(_ sender: Any) {
         if let lecture = lectureOutlineView.item(atRow: lectureOutlineView.selectedRow) as? PDFDocument {
             openDocumentNames = openDocumentNames.filter({ !($0 == lecture.documentURL) })
-            selectedDocument = nil
+            
             lectureOutline.delete(lecture)
+            selectedDocument = nil
             lectureOutlineView.reloadData()
             bookmarkOutline.deleteFor(document: lecture)
             bookmarkOutlineView.reloadData()
         }
     }
     @IBAction func present(_ sender: Any) {
-        let presentationWindow = PresentationWindowController(owner: self)
-        presentationWindow.showWindow(self)
-        presentationWindow.update(pdfView.currentPage!)
-        presentationWindows.insert(presentationWindow)
+        if let currentPage = pdfView.currentPage {
+            let presentationWindow = PresentationWindowController(owner: self)
+            presentationWindow.showWindow(self)
+            presentationWindow.update(currentPage)
+            presentationWindows.insert(presentationWindow)
+        }
     }
     
     @IBAction func removeBookmark(_ sender: Any) {
@@ -211,7 +238,11 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
                     if let popController = searchResultsPop.contentViewController as? SearchPopoverController {
                         popController.prevNext.isEnabled = true
                         if(results.isEmpty) {
-                            popController.searchResultsCountLabel.stringValue = "Nothing like \"\(searchBar.stringValue)\" found in \(selectedDocument?.documentURL?.lastPathComponent ?? "the current document")"
+                            var shortenedSearchTerm = searchBar.stringValue
+                            if searchBar.stringValue.characters.count > 17 {
+                              shortenedSearchTerm = searchBar.stringValue.prefix(14) + "..."
+                            }
+                            popController.searchResultsCountLabel.stringValue = "Nothing like \"\(shortenedSearchTerm)\" found in \(selectedDocument?.documentURL?.lastPathComponent ?? "the current document")"
                             popController.prevNext.isEnabled = false
                             return
                         }
@@ -242,9 +273,6 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
         }
     }
     
-    @IBAction func zoomToFit(_ sender: Any) {
-        pdfView.autoScales = true
-    }
     // Function to add a new bookmark for the current page in the pdf view to the bookmark model.
     // Handles changes to the bookmark outline view.
     @IBAction func newBookmark(_ sender: Any) {
