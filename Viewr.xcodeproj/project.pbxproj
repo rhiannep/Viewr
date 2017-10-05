@@ -13,8 +13,6 @@
 		1A178E891F809C00004B005B /* PresentationWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A178E871F809C00004B005B /* PresentationWindow.xib */; };
 		1A73BEC31F6B680000298607 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A73BEC21F6B680000298607 /* AppDelegate.swift */; };
 		1A73BEC71F6B680000298607 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A73BEC61F6B680000298607 /* Assets.xcassets */; };
-		1A73BED51F6B680100298607 /* ViewrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A73BED41F6B680100298607 /* ViewrTests.swift */; };
-		1A73BEE01F6B680100298607 /* ViewrUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A73BEDF1F6B680100298607 /* ViewrUITests.swift */; };
 		1A73BEEE1F6B6C8B00298607 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A73BEED1F6B6C8B00298607 /* MainMenu.xib */; };
 		1A73BEF11F6B6DB500298607 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A73BEF01F6B6DB500298607 /* Quartz.framework */; };
 		1A73BEF41F6B6EF500298607 /* DocumentWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A73BEF21F6B6EF500298607 /* DocumentWindowController.swift */; };
@@ -51,11 +49,7 @@
 		1A73BEC61F6B680000298607 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A73BECB1F6B680000298607 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A73BED01F6B680100298607 /* ViewrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViewrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1A73BED41F6B680100298607 /* ViewrTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewrTests.swift; sourceTree = "<group>"; };
-		1A73BED61F6B680100298607 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A73BEDB1F6B680100298607 /* ViewrUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViewrUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1A73BEDF1F6B680100298607 /* ViewrUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewrUITests.swift; sourceTree = "<group>"; };
-		1A73BEE11F6B680100298607 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A73BEED1F6B6C8B00298607 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		1A73BEF01F6B6DB500298607 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		1A73BEF21F6B6EF500298607 /* DocumentWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentWindowController.swift; sourceTree = "<group>"; };
@@ -95,8 +89,6 @@
 			isa = PBXGroup;
 			children = (
 				1A73BEC11F6B680000298607 /* Viewr */,
-				1A73BED31F6B680100298607 /* ViewrTests */,
-				1A73BEDE1F6B680100298607 /* ViewrUITests */,
 				1A73BEC01F6B680000298607 /* Products */,
 				1A73BEEF1F6B6DB500298607 /* Frameworks */,
 			);
@@ -123,24 +115,6 @@
 				1AC01B7C1F822B9200FA5E16 /* Controllers */,
 			);
 			path = Viewr;
-			sourceTree = "<group>";
-		};
-		1A73BED31F6B680100298607 /* ViewrTests */ = {
-			isa = PBXGroup;
-			children = (
-				1A73BED41F6B680100298607 /* ViewrTests.swift */,
-				1A73BED61F6B680100298607 /* Info.plist */,
-			);
-			path = ViewrTests;
-			sourceTree = "<group>";
-		};
-		1A73BEDE1F6B680100298607 /* ViewrUITests */ = {
-			isa = PBXGroup;
-			children = (
-				1A73BEDF1F6B680100298607 /* ViewrUITests.swift */,
-				1A73BEE11F6B680100298607 /* Info.plist */,
-			);
-			path = ViewrUITests;
 			sourceTree = "<group>";
 		};
 		1A73BEEF1F6B6DB500298607 /* Frameworks */ = {
@@ -335,7 +309,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A73BED51F6B680100298607 /* ViewrTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,7 +316,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A73BEE01F6B680100298607 /* ViewrUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,6 +388,7 @@
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -464,6 +437,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

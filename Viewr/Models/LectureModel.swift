@@ -37,6 +37,16 @@ class LectureSetModel: NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate 
         return documents.first(where: {$0.documentURL == byURL})
     }
     
+    func getRelativeTo(_ currentDocument: PDFDocument, by: Int) -> PDFDocument? {
+        if let indexOfCurrentDocument = documents.index(of: currentDocument) {
+            let newIndex = indexOfCurrentDocument + by
+            if documents.indices.contains(newIndex) {
+              return documents[newIndex]
+            }
+        }
+        return nil
+    }
+    
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
         if let pdf = item as? PDFDocument {
             return (pdf.page(at: index))!
@@ -80,11 +90,13 @@ class LectureSetModel: NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate 
                 } else {
                     window?.nextButton.isEnabled = true
                 }
+                
                 if outlineView.selectedRow == 0 {
                     window?.previousButton.isEnabled = false
                 } else {
                     window?.previousButton.isEnabled = true
                 }
+                
                 if item is PDFDocument {
                     window?.closeButton.isEnabled = true
                 } else {

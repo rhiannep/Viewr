@@ -62,7 +62,6 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
                 toolBar.isHidden = false
                 searchBarHeader.isHidden = false
                 bookmarkView.isHidden = false
-                
             }
         }
     }
@@ -78,7 +77,6 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
         window?.title = "Viewr"
         closeButton.isEnabled = false
         bookmarkCloseButton.isEnabled = false
-
         
         // Observer to change the lecture outline view when the pdf is scrolled.
         NotificationCenter.default.addObserver(self, selector: #selector(DocumentWindowController.pdfViewScolled), name: .PDFViewPageChanged, object: pdfView)
@@ -120,6 +118,7 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
                         self.lectureOutlineView.reloadData()
                         self.selectedDocument = document
                         self.lectureOutlineView.selectRowIndexes(IndexSet(integer: self.lectureOutlineView.row(forItem: document)), byExtendingSelection: false)
+                        self.nextButton?.isEnabled = true
                         self.window?.makeFirstResponder(self.lectureOutlineView)
                     }
                 }
@@ -141,6 +140,9 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
     func textDidChange(_ notification: Notification) {
         if let textBox = notification.object as? NSTextView {
              if(textBox == noteBox) {
+                if textBox.string == "" {
+                    textBox.setAccessibilityPlaceholderValue("Add some notes to \(toolBarTitle.stringValue)");
+                }
                 if let document = lectureOutlineView.item(atRow: lectureOutlineView.selectedRow) as? PDFDocument {
                     notes.add(document: document, text: textBox.attributedString())
                 } else if let page = lectureOutlineView.item(atRow: lectureOutlineView.selectedRow) as? PDFPage {
@@ -174,6 +176,24 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
         lectureOutlineView.scrollRowToVisible(lectureOutlineView.selectedRow)
     }
     
+    @IBAction func nextLecture(_ sender: Any) {
+        if selectedDocument == nil {
+            return
+        }
+        if let nextLecture = lectureOutline.getRelativeTo(selectedDocument!, by: 1) {
+            updatePDF(nextLecture)
+        }
+    }
+    
+    @IBAction func previousLecture(_ sender: Any) {
+        if selectedDocument == nil {
+            return
+        }
+        if let previousLecture = lectureOutline.getRelativeTo(selectedDocument!, by: -1) {
+            updatePDF(previousLecture)
+        }
+    }
+    
     // Changes the selection on the lecture outline view to the previous item when the "previous" control is hit.
     // The pdfview then changes when the lecture outline delegate is notified.
     @IBAction func goToPreviousOutlineItem(_ sender: Any) {
@@ -182,6 +202,10 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
             lectureOutlineView.expandItem(lecture)
         }
         lectureOutlineView.selectRowIndexes(IndexSet(integer: lectureOutlineView.selectedRow - 1), byExtendingSelection: false)
+    }
+    
+    @IBAction func zoomPDFToFit(_ sender: Any) {
+        pdfView.autoScales = true
     }
     
     // Changes the selection on the lecture outline view to the next item when the "next" control is hit.
@@ -194,7 +218,6 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
         lectureOutlineView.selectRowIndexes(IndexSet(integer: lectureOutlineView.selectedRow + 1), byExtendingSelection: false)
     }
     
-    
     @IBAction func closeLecture(_ sender: Any) {
         if let lecture = lectureOutlineView.item(atRow: lectureOutlineView.selectedRow) as? PDFDocument {
             openDocumentNames = openDocumentNames.filter({ !($0 == lecture.documentURL) })
@@ -206,6 +229,7 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
             bookmarkOutlineView.reloadData()
         }
     }
+    
     @IBAction func present(_ sender: Any) {
         if let currentPage = pdfView.currentPage {
             let presentationWindow = PresentationWindowController(owner: self)
@@ -222,6 +246,7 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
         }
         
     }
+    
     @IBAction func searchBarActivated(_ sender: Any) {
         if let searchBar = sender as? NSSearchField {
             if (searchBar.stringValue == "") {
@@ -289,5 +314,41 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
             window?.makeFirstResponder(label)
             bookmarkOutlineView.scrollRowToVisible(bookmarkOutlineView.selectedRow)
         }
+    }
+    
+    override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        switch menuItem.action {
+        case #selector(DocumentWindowController.nextLecture)?:
+            if selectedDocument == nil {
+                return false
+            }
+            if lectureOutline.getRelativeTo(selectedDocument!, by: 1) != nil {
+                return true
+            }
+        case #selector(DocumentWindowController.previousLecture)?:
+            if selectedDocument == nil {
+                return false
+            }
+            if lectureOutline.getRelativeTo(selectedDocument!, by: -1) != nil {
+                return true
+            }
+        case #selector(DocumentWindowController.openPDF)?:
+            return true
+        case #selector(DocumentWindowController.present)?:
+            return selectedDocument != nil
+        case #selector(DocumentWindowController.goToNextOutlineItem)?:
+            if selectedDocument == nil {
+                return false
+            }
+            return nextButton.isEnabled
+        case #selector(DocumentWindowController.goToPreviousOutlineItem)?:
+            if selectedDocument == nil {
+                return false
+            }
+            return previousButton.isEnabled
+        default:
+            return false
+        }
+        return false
     }
 }

@@ -521,7 +521,7 @@
                                                                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                                                             </buttonCell>
                                                                             <connections>
-                                                                                <action selector="zoomToFit:" target="-1" id="OXQ-4q-SOi"/>
+                                                                                <action selector="zoomPDFToFit:" target="-2" id="TyE-TK-Moa"/>
                                                                             </connections>
                                                                         </button>
                                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Dow-gs-4Ek" userLabel="zoom in">
@@ -546,11 +546,9 @@
                                                                                 <constraint firstAttribute="width" constant="30" id="98U-AH-uMU"/>
                                                                                 <constraint firstAttribute="height" constant="30" id="Myy-1C-Fs3"/>
                                                                             </constraints>
-                                                                            <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSGoLeftTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="SLl-SY-318">
+                                                                            <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSGoLeftTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" enabled="NO" state="on" imageScaling="proportionallyDown" inset="2" id="SLl-SY-318">
                                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                 <font key="font" metaFont="system"/>
-                                                                                <string key="keyEquivalent"></string>
-                                                                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                                                             </buttonCell>
                                                                             <connections>
                                                                                 <action selector="goToPreviousOutlineItem:" target="-2" id="sbN-Bs-Mdc"/>
@@ -565,8 +563,6 @@
                                                                             <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSGoRightTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" imageScaling="proportionallyDown" inset="2" id="l1G-tT-PBa">
                                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                                 <font key="font" metaFont="system"/>
-                                                                                <string key="keyEquivalent"></string>
-                                                                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                                                             </buttonCell>
                                                                             <connections>
                                                                                 <action selector="goToNextOutlineItem:" target="-2" id="2E3-lD-o7X"/>
