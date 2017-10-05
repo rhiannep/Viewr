@@ -79,7 +79,7 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
         bookmarkCloseButton.isEnabled = false
         
         // Observer to change the lecture outline view when the pdf is scrolled.
-        NotificationCenter.default.addObserver(self, selector: #selector(DocumentWindowController.pdfViewScolled), name: .PDFViewPageChanged, object: pdfView)
+        NotificationCenter.default.addObserver(self, selector: #selector(DocumentWindowController.pdfViewChangedPage), name: .PDFViewPageChanged, object: pdfView)
     }
     
     func windowWillClose(_ notification: Notification) {
@@ -127,8 +127,14 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
     }
     
     // change the selcted document in the outline view when the page changes in the pdfview
-    @objc func pdfViewScolled(_ notification: NSNotification) {
+    @objc func pdfViewChangedPage(_ notification: NSNotification) {
         let page = (notification.object as? PDFView)?.currentPage
+        if let outlineDocument = lectureOutlineView.item(atRow: lectureOutlineView.selectedRow) as? PDFDocument {
+            if outlineDocument == page?.document {
+                return
+            }
+        }
+       
         lectureOutlineView.expandItem(selectedDocument)
         lectureOutlineView.selectRowIndexes(IndexSet(integer: lectureOutlineView.row(forItem: page)), byExtendingSelection: false)
         for window in presentationWindows {
@@ -159,7 +165,6 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
             selectedDocument = document
             pdfView.go(to: document.page(at: 0)!)
             toolBarTitle.stringValue = (document.documentURL?.lastPathComponent)!
-            lectureOutlineView.selectRowIndexes(IndexSet(integer: lectureOutlineView.row(forItem: document)), byExtendingSelection: false)
             noteBox.textStorage?.setAttributedString(notes.get(document: document))
         } else if let page = item as? PDFPage {
             selectedDocument = page.document
@@ -181,7 +186,7 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
             return
         }
         if let nextLecture = lectureOutline.getRelativeTo(selectedDocument!, by: 1) {
-            updatePDF(nextLecture)
+             lectureOutlineView.selectRowIndexes(IndexSet(integer: lectureOutlineView.row(forItem: nextLecture)), byExtendingSelection: false)
         }
     }
     
@@ -190,7 +195,7 @@ class DocumentWindowController: NSWindowController, NSWindowDelegate, NSTextView
             return
         }
         if let previousLecture = lectureOutline.getRelativeTo(selectedDocument!, by: -1) {
-            updatePDF(previousLecture)
+            lectureOutlineView.selectRowIndexes(IndexSet(integer: lectureOutlineView.row(forItem: previousLecture)), byExtendingSelection: false)
         }
     }
     
