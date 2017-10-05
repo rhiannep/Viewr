@@ -451,7 +451,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "rhianne-cosc346.Viewr";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -465,7 +465,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "rhianne-cosc346.Viewr";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

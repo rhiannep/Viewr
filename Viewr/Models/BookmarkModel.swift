@@ -64,7 +64,7 @@ class BookmarkOutline: NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate 
     }
     
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
-        let view = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell"), owner: self) as? NSTableCellView
+        let view = outlineView.make(withIdentifier: "cell", owner: self) as? NSTableCellView
         if let textField = view?.textField {
             if let bookmark = item as? Bookmark {
                 textField.stringValue = bookmark.name

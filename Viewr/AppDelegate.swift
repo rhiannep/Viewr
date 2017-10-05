@@ -11,10 +11,10 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     
-    var openWindows = Set<DocumentWindowController>()
+    var openWindows = Set<NSWindowController>()
+    
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
         newDocumentWindow(self)
     }
 
@@ -26,7 +26,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if !flag {
             newDocumentWindow(self)
         }
-        return !flag
+        return flag
     }
 
     @IBAction func newDocumentWindow(_ sender: Any) {

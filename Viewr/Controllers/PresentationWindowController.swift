@@ -20,7 +20,7 @@ class PresentationWindowController: NSWindowController, NSWindowDelegate {
     var ownerWindow: DocumentWindowController?
     
     convenience init(owner: DocumentWindowController) {
-        self.init(windowNibName: NSNib.Name(rawValue: "PresentationWindow"))
+        self.init(windowNibName: "PresentationWindow")
         ownerWindow = owner
     }
     
@@ -37,7 +37,8 @@ class PresentationWindowController: NSWindowController, NSWindowDelegate {
     override func windowDidLoad() {
         super.windowDidLoad()
         window?.title = "Present"
-        if let screen = NSScreen.main {
+        
+        if let screen = NSScreen.main() {
             window?.setFrame(screen.visibleFrame, display: true, animate: true)
         }
     }
