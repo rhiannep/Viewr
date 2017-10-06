@@ -23,23 +23,6 @@
 		98044CED1F8702040037370C /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 98044CEC1F8702040037370C /* Credits.rtf */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		1A73BED11F6B680100298607 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1A73BEB71F6B680000298607 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1A73BEBE1F6B680000298607;
-			remoteInfo = Viewr;
-		};
-		1A73BEDC1F6B680100298607 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1A73BEB71F6B680000298607 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1A73BEBE1F6B680000298607;
-			remoteInfo = Viewr;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		1A178E7E1F7F24ED004B005B /* BookmarkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkModel.swift; sourceTree = "<group>"; };
 		1A178E801F804899004B005B /* NoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteModel.swift; sourceTree = "<group>"; };
@@ -49,8 +32,6 @@
 		1A73BEC21F6B680000298607 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1A73BEC61F6B680000298607 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A73BECB1F6B680000298607 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1A73BED01F6B680100298607 /* ViewrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViewrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1A73BEDB1F6B680100298607 /* ViewrUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ViewrUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A73BEED1F6B6C8B00298607 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		1A73BEF01F6B6DB500298607 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		1A73BEF21F6B6EF500298607 /* DocumentWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentWindowController.swift; sourceTree = "<group>"; };
@@ -70,20 +51,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1A73BECD1F6B680100298607 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1A73BED81F6B680100298607 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -100,8 +67,6 @@
 			isa = PBXGroup;
 			children = (
 				1A73BEBF1F6B680000298607 /* Viewr.app */,
-				1A73BED01F6B680100298607 /* ViewrTests.xctest */,
-				1A73BEDB1F6B680100298607 /* ViewrUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -179,42 +144,6 @@
 			productReference = 1A73BEBF1F6B680000298607 /* Viewr.app */;
 			productType = "com.apple.product-type.application";
 		};
-		1A73BECF1F6B680100298607 /* ViewrTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1A73BEE71F6B680100298607 /* Build configuration list for PBXNativeTarget "ViewrTests" */;
-			buildPhases = (
-				1A73BECC1F6B680100298607 /* Sources */,
-				1A73BECD1F6B680100298607 /* Frameworks */,
-				1A73BECE1F6B680100298607 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1A73BED21F6B680100298607 /* PBXTargetDependency */,
-			);
-			name = ViewrTests;
-			productName = ViewrTests;
-			productReference = 1A73BED01F6B680100298607 /* ViewrTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		1A73BEDA1F6B680100298607 /* ViewrUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1A73BEEA1F6B680100298607 /* Build configuration list for PBXNativeTarget "ViewrUITests" */;
-			buildPhases = (
-				1A73BED71F6B680100298607 /* Sources */,
-				1A73BED81F6B680100298607 /* Frameworks */,
-				1A73BED91F6B680100298607 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1A73BEDD1F6B680100298607 /* PBXTargetDependency */,
-			);
-			name = ViewrUITests;
-			productName = ViewrUITests;
-			productReference = 1A73BEDB1F6B680100298607 /* ViewrUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -229,18 +158,6 @@
 						CreatedOnToolsVersion = 8.3.3;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
-					};
-					1A73BECF1F6B680100298607 = {
-						CreatedOnToolsVersion = 8.3.3;
-						LastSwiftMigration = 0900;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 1A73BEBE1F6B680000298607;
-					};
-					1A73BEDA1F6B680100298607 = {
-						CreatedOnToolsVersion = 8.3.3;
-						LastSwiftMigration = 0900;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 1A73BEBE1F6B680000298607;
 					};
 				};
 			};
@@ -258,8 +175,6 @@
 			projectRoot = "";
 			targets = (
 				1A73BEBE1F6B680000298607 /* Viewr */,
-				1A73BECF1F6B680100298607 /* ViewrTests */,
-				1A73BEDA1F6B680100298607 /* ViewrUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -275,20 +190,6 @@
 				1AC01B781F81F81100FA5E16 /* SearchResultsView.xib in Resources */,
 				1A178E891F809C00004B005B /* PresentationWindow.xib in Resources */,
 				1A73BEF51F6B6EF500298607 /* DocumentWindow.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1A73BECE1F6B680100298607 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1A73BED91F6B680100298607 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,34 +210,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1A73BECC1F6B680100298607 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1A73BED71F6B680100298607 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		1A73BED21F6B680100298607 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1A73BEBE1F6B680000298607 /* Viewr */;
-			targetProxy = 1A73BED11F6B680100298607 /* PBXContainerItemProxy */;
-		};
-		1A73BEDD1F6B680100298607 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1A73BEBE1F6B680000298607 /* Viewr */;
-			targetProxy = 1A73BEDC1F6B680100298607 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1A73BEE21F6B680100298607 /* Debug */ = {
@@ -473,68 +347,6 @@
 			};
 			name = Release;
 		};
-		1A73BEE81F6B680100298607 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = ViewrTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "rhianne-cosc346.ViewrTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Viewr.app/Contents/MacOS/Viewr";
-			};
-			name = Debug;
-		};
-		1A73BEE91F6B680100298607 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = ViewrTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "rhianne-cosc346.ViewrTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Viewr.app/Contents/MacOS/Viewr";
-			};
-			name = Release;
-		};
-		1A73BEEB1F6B680100298607 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = ViewrUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "rhianne-cosc346.ViewrUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
-				TEST_TARGET_NAME = Viewr;
-			};
-			name = Debug;
-		};
-		1A73BEEC1F6B680100298607 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = ViewrUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "rhianne-cosc346.ViewrUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.0;
-				TEST_TARGET_NAME = Viewr;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -552,24 +364,6 @@
 			buildConfigurations = (
 				1A73BEE51F6B680100298607 /* Debug */,
 				1A73BEE61F6B680100298607 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1A73BEE71F6B680100298607 /* Build configuration list for PBXNativeTarget "ViewrTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1A73BEE81F6B680100298607 /* Debug */,
-				1A73BEE91F6B680100298607 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1A73BEEA1F6B680100298607 /* Build configuration list for PBXNativeTarget "ViewrUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1A73BEEB1F6B680100298607 /* Debug */,
-				1A73BEEC1F6B680100298607 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
