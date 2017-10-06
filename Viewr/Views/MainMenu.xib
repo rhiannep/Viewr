@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -579,6 +579,12 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Navigate" id="RcQ-mi-bml">
                         <items>
+                            <menuItem title="Search..." keyEquivalent="f" id="Yzp-wb-WzW">
+                                <connections>
+                                    <action selector="find:" target="-1" id="7na-Nx-fCc"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="U5T-xE-PCY"/>
                             <menuItem title="Next Lecture" keyEquivalent="" id="LO1-Vh-pKF">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
                                 <connections>
@@ -591,7 +597,7 @@
                                     <action selector="previousLecture:" target="-1" id="tOv-jl-6fn"/>
                                 </connections>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="U5T-xE-PCY"/>
+                            <menuItem isSeparatorItem="YES" id="Gff-Gq-TkQ"/>
                             <menuItem title="Next" keyEquivalent="" id="fES-xu-Jf0">
                                 <connections>
                                     <action selector="goToNextOutlineItem:" target="-1" id="f6M-wF-Yue"/>

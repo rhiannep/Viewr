@@ -20,6 +20,7 @@
 		1AC01B781F81F81100FA5E16 /* SearchResultsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1AC01B771F81F81100FA5E16 /* SearchResultsView.xib */; };
 		1AC01B7A1F820AD300FA5E16 /* SearchPopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC01B791F820AD300FA5E16 /* SearchPopoverController.swift */; };
 		1AC01B7F1F822C1700FA5E16 /* LectureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC01B7E1F822C1700FA5E16 /* LectureModel.swift */; };
+		98044CED1F8702040037370C /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 98044CEC1F8702040037370C /* Credits.rtf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		1AC01B771F81F81100FA5E16 /* SearchResultsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchResultsView.xib; sourceTree = "<group>"; };
 		1AC01B791F820AD300FA5E16 /* SearchPopoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPopoverController.swift; sourceTree = "<group>"; };
 		1AC01B7E1F822C1700FA5E16 /* LectureModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LectureModel.swift; sourceTree = "<group>"; };
+		98044CEC1F8702040037370C /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				1A73BEC21F6B680000298607 /* AppDelegate.swift */,
 				1A73BEC61F6B680000298607 /* Assets.xcassets */,
 				1A73BECB1F6B680000298607 /* Info.plist */,
+				98044CEC1F8702040037370C /* Credits.rtf */,
 				1AC01B7B1F822B7300FA5E16 /* Views */,
 				1AC01B7D1F822BC600FA5E16 /* Models */,
 				1AC01B7C1F822B9200FA5E16 /* Controllers */,
@@ -267,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A73BEC71F6B680000298607 /* Assets.xcassets in Resources */,
+				98044CED1F8702040037370C /* Credits.rtf in Resources */,
 				1A73BEEE1F6B6C8B00298607 /* MainMenu.xib in Resources */,
 				1AC01B781F81F81100FA5E16 /* SearchResultsView.xib in Resources */,
 				1A178E891F809C00004B005B /* PresentationWindow.xib in Resources */,
