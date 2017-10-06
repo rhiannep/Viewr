@@ -57,7 +57,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="File" id="bib-Uj-vzu">
                         <items>
-                            <menuItem title="New" keyEquivalent="n" id="Was-JA-tGl">
+                            <menuItem title="New Lecture Set" keyEquivalent="n" id="Was-JA-tGl">
                                 <connections>
                                     <action selector="newDocumentWindow:" target="gBA-zP-9jM" id="3rn-yT-jUy"/>
                                 </connections>
@@ -579,9 +579,9 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Navigate" id="RcQ-mi-bml">
                         <items>
-                            <menuItem title="Search..." keyEquivalent="f" id="Yzp-wb-WzW">
+                            <menuItem title="Search" keyEquivalent="s" id="o7B-D4-8CE">
                                 <connections>
-                                    <action selector="find:" target="-1" id="7na-Nx-fCc"/>
+                                    <action selector="find:" target="-1" id="Tdp-K1-OYD"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="U5T-xE-PCY"/>
